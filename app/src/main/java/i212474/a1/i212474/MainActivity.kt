@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Handler().postDelayed({
-            val intent = Intent(this,  page5_Activity_search ::class.java)
+            val intent = Intent(this,  page6_Activity_search2 ::class.java)
             startActivity(intent)
             finish() // Optional: Finish the current activity if you don't want to go back to it
         }, 5000)
