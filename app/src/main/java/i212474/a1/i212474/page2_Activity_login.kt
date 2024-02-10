@@ -42,8 +42,8 @@ class page2_Activity_login : AppCompatActivity() {
             }
 //            if(!password.isEmpty() and !mail.isEmpty())
 //            {
-//                val intent = Intent(this, Page4Home1_Activity::class.java)
-//                startActivity(intent)
+                val intent = Intent(this, page4_Activity_home::class.java)
+                startActivity(intent)
 //            }
         }
         signUp.setOnClickListener {

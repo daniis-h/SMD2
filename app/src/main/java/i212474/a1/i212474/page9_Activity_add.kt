@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
 
 class page9_Activity_add : AppCompatActivity() {
     var option = arrayOf("Available", "Not Available")
@@ -31,5 +33,22 @@ class page9_Activity_add : AppCompatActivity() {
 //            startActivity(intent)
 //            finish()
 //        }
+
+        val search = findViewById<LinearLayout>(R.id.search)
+
+        search.setOnClickListener {
+            val intent = Intent(this, page5_Activity_search::class.java)
+            startActivity(intent)
+        }
+        val home = findViewById<LinearLayout>(R.id.home)
+
+        home.setOnClickListener {
+            val intent = Intent(this, page4_Activity_home::class.java)
+            startActivity(intent)
+        }
+        val back1 = findViewById<ImageView>(R.id.back)
+        back1.setOnClickListener {
+            finish() // This will close the current activity and go back to the previous one
+        }
     }
 }
