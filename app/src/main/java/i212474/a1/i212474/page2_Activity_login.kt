@@ -46,10 +46,10 @@ class page2_Activity_login : AppCompatActivity() {
 //                startActivity(intent)
 //            }
         }
-//        signUp.setOnClickListener {
-//            val intent = Intent(this, page3::class.java)
-//            startActivity(intent)
-//        }
+        signUp.setOnClickListener {
+            val intent = Intent(this, page3_Activity_create::class.java)
+            startActivity(intent)
+        }
 
     }
 }
