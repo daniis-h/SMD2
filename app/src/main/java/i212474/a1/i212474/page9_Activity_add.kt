@@ -57,5 +57,17 @@ class page9_Activity_add : AppCompatActivity() {
             val intent = Intent(this, page11_Activity2_chats::class.java)
             startActivity(intent)
         }
+        val vid = findViewById<LinearLayout>(R.id.video)
+
+        vid.setOnClickListener {
+            val intent = Intent(this, page15_Activity_video::class.java)
+            startActivity(intent)
+        }
+        val pic = findViewById<LinearLayout>(R.id.photo)
+
+        pic.setOnClickListener {
+            val intent = Intent(this, page14_Activity_camera::class.java)
+            startActivity(intent)
+        }
     }
 }

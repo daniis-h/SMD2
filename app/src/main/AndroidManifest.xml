@@ -13,6 +13,9 @@
         android:theme="@style/Theme.I212474"
         tools:targetApi="31">
         <activity
+            android:name=".page15_Activity_video"
+            android:exported="false" />
+        <activity
             android:name=".page14_Activity_camera"
             android:exported="false" />
         <activity

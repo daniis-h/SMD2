@@ -1,6 +1,5 @@
 package i212474.a1.i212474
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,20 +7,19 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 
-class page14_Activity_camera : AppCompatActivity() {
-
+class page15_Activity_video : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_page14_camera)
+        setContentView(R.layout.activity_page15_video)
 
-        val vid1=findViewById<LinearLayout>(R.id.video)
+        val vid1=findViewById<LinearLayout>(R.id.photo)
         vid1.setOnClickListener {
-            val intent=Intent(this, page15_Activity_video::class.java)
+            val intent= Intent(this, page14_Activity_camera::class.java)
             startActivity(intent)
         }
-        val vid2=findViewById<TextView>(R.id.video1)
+        val vid2=findViewById<TextView>(R.id.photo1)
         vid1.setOnClickListener {
-            val intent=Intent(this, page15_Activity_video::class.java)
+            val intent= Intent(this, page14_Activity_camera::class.java)
             startActivity(intent)
         }
         val back1 = findViewById<ImageView>(R.id.back)
