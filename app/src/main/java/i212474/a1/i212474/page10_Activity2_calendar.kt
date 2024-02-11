@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 
 class page10_Activity2_calendar : AppCompatActivity() {
@@ -19,6 +20,11 @@ class page10_Activity2_calendar : AppCompatActivity() {
         val book =findViewById<Button>(R.id.booked)
         book.setOnClickListener {
             Toast.makeText(applicationContext, "Appointment is booked", Toast.LENGTH_SHORT).show()
+        }
+        val  chat=findViewById<LinearLayout>(R.id.chat)
+        chat.setOnClickListener {
+            val intent=Intent(this, page12_Activity_chat2::class.java)
+            startActivity(intent)
         }
     }
 }

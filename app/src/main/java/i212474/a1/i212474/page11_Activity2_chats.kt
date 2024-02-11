@@ -68,10 +68,10 @@ class page11_Activity2_chats : AppCompatActivity() {
             val intent = Intent(this, page5_Activity_search::class.java)
             startActivity(intent)
         }
-//        open.setOnClickListener {
-//            val intent = Intent(this, page7_Activity_profile::class.java)
-//            startActivity(intent)
-//        }
+        open.setOnClickListener {
+            val intent = Intent(this, page12_Activity_chat2::class.java)
+            startActivity(intent)
+        }
         val back1 = findViewById<ImageView>(R.id.back)
         back1.setOnClickListener {
             finish() // This will close the current activity and go back to the previous one

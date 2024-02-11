@@ -985,7 +985,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="6.4"
-        android:background="#FF279187"
+        android:background="#037369"
         android:orientation="horizontal"
         >
 
@@ -1013,7 +1013,9 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:src="@drawable/home"
-
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
                     />
                 <TextView
                     android:layout_width="wrap_content"
@@ -1040,7 +1042,9 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:src="@drawable/search"
-
+                    android:paddingStart="5dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="5dp"
 
                     />
                 <TextView
@@ -1093,6 +1097,9 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:src="@drawable/chat"
+                android:paddingStart="3dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="3dp"
 
                 />
             <TextView
@@ -1120,7 +1127,9 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:src="@drawable/user"
-
+                android:paddingStart="5dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="5dp"
 
                 />
             <TextView

@@ -84,8 +84,8 @@
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#FF279187"
         android:layout_alignParentBottom="true"
+        android:background="#037369"
         android:orientation="horizontal"
 
         >
@@ -99,57 +99,63 @@
 
 
             >
+
             <LinearLayout
+                android:id="@+id/home"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:paddingRight="10dp"
                 android:paddingLeft="25dp"
                 android:paddingTop="3dp"
-                android:id="@+id/home"
-                >
+                android:paddingRight="10dp">
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:src="@drawable/home"
-
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Home"
-                    android:textStyle="bold"
                     android:textSize="14dp"
+                    android:textStyle="bold"
 
                     />
 
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/search"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:paddingRight="10dp"
                 android:paddingLeft="25dp"
                 android:paddingTop="3dp"
-                android:id="@+id/search"
-                >
+                android:paddingRight="10dp">
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:src="@drawable/search"
-
+                    android:paddingStart="5dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="5dp"
 
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Search"
-                    android:textStyle="bold"
                     android:textSize="14dp"
+                    android:textStyle="bold"
 
                     />
 
@@ -159,77 +165,81 @@
         </LinearLayout>
 
 
-
         <LinearLayout
+            android:id="@+id/plus"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/plus"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:paddingRight="10dp"
-            android:paddingLeft="25dp"
-            android:paddingBottom="7dp"
             android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="25dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="7dp"
 
             >
 
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/add"
-                />
+                android:src="@drawable/add" />
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/chat"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingRight="10dp"
             android:paddingLeft="25dp"
             android:paddingTop="3dp"
-            android:id="@+id/chat"
-            >
+            android:paddingRight="10dp">
 
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:src="@drawable/chat"
-
+                android:paddingStart="3dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="3dp"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Chat"
-                android:textStyle="bold"
                 android:textSize="14dp"
+                android:textStyle="bold"
 
                 />
 
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/profile"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingRight="10dp"
             android:paddingLeft="10dp"
             android:paddingTop="3dp"
-            android:id="@+id/profile"
-            >
+            android:paddingRight="10dp">
 
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:src="@drawable/user"
-
+                android:paddingStart="5dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="5dp"
 
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Profile"
-                android:textStyle="bold"
                 android:textSize="14dp"
+                android:textStyle="bold"
 
                 />
 
