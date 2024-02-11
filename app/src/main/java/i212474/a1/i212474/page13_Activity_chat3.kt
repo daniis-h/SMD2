@@ -3,15 +3,13 @@ package i212474.a1.i212474
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ScrollView
 
-class page12_Activity_chat2 : AppCompatActivity() {
+class page13_Activity_chat3 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_page12_chat2)
+        setContentView(R.layout.activity_page13_chat3)
         val home = findViewById<LinearLayout>(R.id.home)
 
         home.setOnClickListener {
@@ -37,11 +35,9 @@ class page12_Activity_chat2 : AppCompatActivity() {
             val intent = Intent(this, page11_Activity2_chats::class.java)
             startActivity(intent)
         }
-
         val back1 = findViewById<ImageView>(R.id.back)
         back1.setOnClickListener {
             finish() // This will close the current activity and go back to the previous one
         }
-
     }
 }

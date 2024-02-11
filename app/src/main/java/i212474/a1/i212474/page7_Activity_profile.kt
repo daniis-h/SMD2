@@ -40,5 +40,12 @@ class page7_Activity_profile : AppCompatActivity() {
             val intent = Intent(this, page10_Activity2_calendar::class.java)
             startActivity(intent)
         }
+
+        val community = findViewById<LinearLayout>(R.id.join_com)
+
+        community.setOnClickListener {
+            val intent = Intent(this, page13_Activity_chat3::class.java)
+            startActivity(intent)
+        }
     }
 }
