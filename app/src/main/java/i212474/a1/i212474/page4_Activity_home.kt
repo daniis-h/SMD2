@@ -176,6 +176,13 @@ class page4_Activity_home : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val chat = findViewById<LinearLayout>(R.id.chat)
+
+        chat.setOnClickListener {
+            val intent = Intent(this, page11_Activity2_chats::class.java)
+            startActivity(intent)
+        }
+
 
     }
 }

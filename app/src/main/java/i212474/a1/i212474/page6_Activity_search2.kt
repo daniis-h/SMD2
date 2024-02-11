@@ -89,6 +89,13 @@ class page6_Activity_search2 : AppCompatActivity() {
         back1.setOnClickListener {
             finish() // This will close the current activity and go back to the previous one
         }
+
+        val chat = findViewById<LinearLayout>(R.id.chat)
+
+        chat.setOnClickListener {
+            val intent = Intent(this, page11_Activity2_chats::class.java)
+            startActivity(intent)
+        }
     }
 }
 

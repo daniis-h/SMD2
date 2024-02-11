@@ -49,7 +49,7 @@ class page5_Activity_search : AppCompatActivity() {
         val home = findViewById<LinearLayout>(R.id.home)
 
         home.setOnClickListener {
-            val intent = Intent(this, page5_Activity_search::class.java)
+            val intent = Intent(this, page4_Activity_home::class.java)
             startActivity(intent)
         }
         val add = findViewById<LinearLayout>(R.id.plus)
@@ -64,6 +64,13 @@ class page5_Activity_search : AppCompatActivity() {
             val intent = Intent(this, page6_Activity_search2::class.java)
             startActivity(intent)
 
+        }
+
+        val chat = findViewById<LinearLayout>(R.id.chat)
+
+        chat.setOnClickListener {
+            val intent = Intent(this, page11_Activity2_chats::class.java)
+            startActivity(intent)
         }
         val back1 = findViewById<ImageView>(R.id.back)
         back1.setOnClickListener {
