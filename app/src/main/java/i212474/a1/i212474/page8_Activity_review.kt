@@ -3,8 +3,10 @@ package i212474.a1.i212474
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 
 class page8_Activity_review : AppCompatActivity() {
     lateinit var img1: ImageView
@@ -60,6 +62,10 @@ class page8_Activity_review : AppCompatActivity() {
         val back1 = findViewById<ImageView>(R.id.back)
         back1.setOnClickListener {
             finish() // This will close the current activity and go back to the previous one
+        }
+        val book =findViewById<Button>(R.id.feedback)
+        book.setOnClickListener {
+            Toast.makeText(applicationContext, "Feedback is submitted", Toast.LENGTH_SHORT).show()
         }
 
     }

@@ -3,6 +3,7 @@ package i212474.a1.i212474
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -33,6 +34,11 @@ class page7_Activity_profile : AppCompatActivity() {
         val back1 = findViewById<ImageView>(R.id.back)
         back1.setOnClickListener {
             finish() // This will close the current activity and go back to the previous one
+        }
+        val book =findViewById<Button>(R.id.book_session)
+        book.setOnClickListener {
+            val intent = Intent(this, page10_Activity2_calendar::class.java)
+            startActivity(intent)
         }
     }
 }
