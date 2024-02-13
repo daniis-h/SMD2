@@ -26,5 +26,17 @@ class page10_Activity2_calendar : AppCompatActivity() {
             val intent=Intent(this, page12_Activity_chat2::class.java)
             startActivity(intent)
         }
+        val vidcall=findViewById<LinearLayout>(R.id.vidaCal)
+        vidcall.setOnClickListener {
+            val intent=Intent(this, page22_Activity_vidCall::class.java)
+            startActivity(intent)
+        }
+
+        val call=findViewById<LinearLayout>(R.id.call)
+        call.setOnClickListener {
+            val intent=Intent(this, page23_Activity_audioCall::class.java)
+            startActivity(intent)
+        }
+
     }
 }

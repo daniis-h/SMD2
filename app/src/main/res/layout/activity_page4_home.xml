@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent">
+<LinearLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wallpaper"
@@ -1023,6 +1027,7 @@
                     android:text="Home"
                     android:textStyle="bold"
                     android:textSize="14dp"
+                    android:textColor="#A39D9D"
 
                     />
 
@@ -1053,6 +1058,7 @@
                     android:text="Search"
                     android:textStyle="bold"
                     android:textSize="14dp"
+                    android:textColor="#A39D9D"
 
                     />
 
@@ -1066,7 +1072,6 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/plus"
             android:orientation="vertical"
             android:gravity="center"
             android:paddingRight="10dp"
@@ -1076,11 +1081,7 @@
 
             >
 
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/add"
-                />
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -1090,6 +1091,7 @@
             android:paddingRight="10dp"
             android:paddingLeft="25dp"
             android:paddingTop="3dp"
+            android:layout_marginLeft="50dp"
             android:id="@+id/chat"
             >
 
@@ -1108,6 +1110,7 @@
                 android:text="Chat"
                 android:textStyle="bold"
                 android:textSize="14dp"
+                android:textColor="#A39D9D"
 
                 />
 
@@ -1138,6 +1141,7 @@
                 android:text="Profile"
                 android:textStyle="bold"
                 android:textSize="14dp"
+                android:textColor="#A39D9D"
 
                 />
 
@@ -1146,4 +1150,28 @@
     </LinearLayout>
 
 
+
 </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+
+        android:layout_marginBottom="35dp"
+        android:gravity="bottom|center_horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/plus">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:strokeWidth="4dp"
+
+            android:background="#C4CAC9"
+            app:strokeColor="#037369"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            android:src="@drawable/add"
+            android:layout_margin="1dp"/></LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

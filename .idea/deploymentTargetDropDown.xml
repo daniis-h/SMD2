@@ -5,6 +5,15 @@
       <entry key="app">
         <State />
       </entry>
+      <entry key="buttonClick()">
+        <State />
+      </entry>
+      <entry key="testButton()">
+        <State />
+      </entry>
+      <entry key="typeSomething()">
+        <State />
+      </entry>
     </value>
   </component>
 </project>

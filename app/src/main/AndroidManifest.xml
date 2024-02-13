@@ -13,6 +13,33 @@
         android:theme="@style/Theme.I212474"
         tools:targetApi="31">
         <activity
+            android:name=".page24_Activity_notificatons"
+            android:exported="false" />
+        <activity
+            android:name=".page23_Activity_audioCall"
+            android:exported="false" />
+        <activity
+            android:name=".page22_Activity_vidCall"
+            android:exported="false" />
+        <activity
+            android:name=".page21_Activity_verify"
+            android:exported="false" />
+        <activity
+            android:name=".page20_Activity_resetPass"
+            android:exported="false" />
+        <activity
+            android:name=".page19_Activity_forgetEmail"
+            android:exported="false" />
+        <activity
+            android:name=".page18_Activity_bookSession"
+            android:exported="false" />
+        <activity
+            android:name=".page17_Activity_profileView"
+            android:exported="false" />
+        <activity
+            android:name=".page16_Activity2_profile"
+            android:exported="false" />
+        <activity
             android:name=".page15_Activity_video"
             android:exported="false" />
         <activity

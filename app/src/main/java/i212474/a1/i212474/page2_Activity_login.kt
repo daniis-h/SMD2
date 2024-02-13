@@ -50,6 +50,11 @@ class page2_Activity_login : AppCompatActivity() {
             val intent = Intent(this, page3_Activity_create::class.java)
             startActivity(intent)
         }
+        val forget1=findViewById<TextView>(R.id.forget)
+        forget1.setOnClickListener {
+            val intent = Intent(this, page19_Activity_forgetEmail::class.java)
+            startActivity(intent)
+        }
 
     }
 }

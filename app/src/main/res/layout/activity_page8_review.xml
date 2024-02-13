@@ -216,6 +216,7 @@
             android:background="@drawable/home_options"
             android:text="Submit Feedback"
             android:textSize="20sp"
+            android:layout_marginBottom="5dp"
             android:id="@+id/feedback"
             />
 

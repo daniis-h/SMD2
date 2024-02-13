@@ -69,5 +69,10 @@ class page9_Activity_add : AppCompatActivity() {
             val intent = Intent(this, page14_Activity_camera::class.java)
             startActivity(intent)
         }
+        val profile=findViewById<LinearLayout>(R.id.profile)
+        profile.setOnClickListener {
+            val intent=Intent(this, page17_Activity_profileView::class.java)
+            startActivity(intent)
+        }
     }
 }

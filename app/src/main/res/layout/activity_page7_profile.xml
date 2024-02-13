@@ -291,7 +291,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:padding="2dp"
-                    android:src="@drawable/chat"/>
+                    android:src="@drawable/chat2"/>
             </LinearLayout>
 
 
@@ -319,7 +319,7 @@
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:padding="2dp"
-                    android:src="@drawable/user"/>
+                    android:src="@drawable/user2"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -348,6 +348,7 @@
     android:text="Book a Session"
     android:textSize="20sp"
     android:id="@+id/book_session"
+    android:layout_marginBottom="5dp"
     />
 
     </LinearLayout>

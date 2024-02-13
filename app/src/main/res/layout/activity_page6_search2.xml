@@ -42,13 +42,15 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
             <AutoCompleteTextView
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Filter"
                 android:textColor="#279187"
-                android:background="#B2F6F0"
+                android:background="@drawable/home_options"
+
                 android:inputType="none"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -113,11 +115,10 @@
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/home"
                     android:paddingStart="5dp"
                     android:paddingTop="5dp"
                     android:paddingEnd="5dp"
-                    />
+                    android:src="@drawable/home" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -125,6 +126,7 @@
                     android:text="Home"
                     android:textSize="14dp"
                     android:textStyle="bold"
+                    android:textColor="#A39D9D"
 
                     />
 
@@ -143,10 +145,10 @@
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/search"
                     android:paddingStart="5dp"
                     android:paddingTop="3dp"
                     android:paddingEnd="5dp"
+                    android:src="@drawable/search"
 
                     />
 
@@ -156,6 +158,7 @@
                     android:text="Search"
                     android:textSize="14dp"
                     android:textStyle="bold"
+                    android:textColor="#A39D9D"
 
                     />
 
@@ -166,8 +169,8 @@
 
 
         <LinearLayout
-            android:id="@+id/plus"
-            android:layout_width="wrap_content"
+
+            android:layout_width="45dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
@@ -178,10 +181,7 @@
 
             >
 
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/add" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -197,11 +197,10 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/chat"
                 android:paddingStart="3dp"
                 android:paddingTop="3dp"
                 android:paddingEnd="3dp"
-                />
+                android:src="@drawable/chat" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -209,6 +208,7 @@
                 android:text="Chat"
                 android:textSize="14dp"
                 android:textStyle="bold"
+                android:textColor="#A39D9D"
 
                 />
 
@@ -227,10 +227,10 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/user"
                 android:paddingStart="5dp"
                 android:paddingTop="5dp"
                 android:paddingEnd="5dp"
+                android:src="@drawable/user"
 
                 />
 
@@ -240,11 +240,36 @@
                 android:text="Profile"
                 android:textSize="14dp"
                 android:textStyle="bold"
+                android:textColor="#A39D9D"
 
                 />
 
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_horizontal|bottom">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/plus"
+            >
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_margin="1dp"
+
+                android:background="#D3D6D6"
+                android:src="@drawable/add"
+                app:shapeAppearanceOverlay="@style/circleImageView"
+                app:strokeColor="#037369"
+                app:strokeWidth="4dp" /></LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

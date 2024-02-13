@@ -182,6 +182,11 @@ class page4_Activity_home : AppCompatActivity() {
             val intent = Intent(this, page11_Activity2_chats::class.java)
             startActivity(intent)
         }
+        val profile=findViewById<LinearLayout>(R.id.profile)
+        profile.setOnClickListener {
+            val intent=Intent(this, page17_Activity_profileView::class.java)
+            startActivity(intent)
+        }
 
 
     }

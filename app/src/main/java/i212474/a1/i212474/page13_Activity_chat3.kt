@@ -39,5 +39,22 @@ class page13_Activity_chat3 : AppCompatActivity() {
         back1.setOnClickListener {
             finish() // This will close the current activity and go back to the previous one
         }
+        val vidcall=findViewById<ImageView>(R.id.vidaCal)
+        vidcall.setOnClickListener {
+            val intent=Intent(this, page22_Activity_vidCall::class.java)
+            startActivity(intent)
+        }
+
+        val call=findViewById<ImageView>(R.id.call)
+        call.setOnClickListener {
+            val intent=Intent(this, page23_Activity_audioCall::class.java)
+            startActivity(intent)
+        }
+
+        val profile=findViewById<LinearLayout>(R.id.profile)
+        profile.setOnClickListener {
+            val intent=Intent(this, page17_Activity_profileView::class.java)
+            startActivity(intent)
+        }
     }
 }

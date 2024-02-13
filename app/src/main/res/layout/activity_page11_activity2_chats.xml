@@ -71,42 +71,111 @@
                         android:orientation="horizontal"
                         android:padding="10dp"
                         >
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-
-                            app:strokeWidth="3dp"
-                            app:strokeColor="#FFC90A"
-                            app:shapeAppearanceOverlay="@style/circleImageView"
-                            android:src="@drawable/profilepic"
-                            />
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginLeft="15dp"
-                            app:strokeWidth="3dp"
-                            app:strokeColor="#FFC90A"
-                            app:shapeAppearanceOverlay="@style/circleImageView"
-                            android:src="@drawable/profilepic"
-                            />
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginLeft="15dp"
-                            app:strokeWidth="3dp"
-                            app:strokeColor="#FFC90A"
-                            app:shapeAppearanceOverlay="@style/circleImageView"
-                            android:src="@drawable/profilepic"
-                            />
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginLeft="15dp"
-                            app:strokeWidth="3dp"
-                            app:strokeColor="#FFC90A"
-                            app:shapeAppearanceOverlay="@style/circleImageView"
-                            android:src="@drawable/profilepic"
-                            />
+                        <RelativeLayout
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="2dp"
+                            >
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/profilepic"
+                                app:shapeAppearanceOverlay="@style/circleImageView"
+                                app:strokeColor="#FFC90A"
+                                app:strokeWidth="3dp" />
+                            <TextView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:background="@drawable/status_online_off"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginRight="10dp"
+                                />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="7dp"
+                            >
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/profilepic"
+                                app:shapeAppearanceOverlay="@style/circleImageView"
+                                app:strokeColor="#FFC90A"
+                                app:strokeWidth="3dp" />
+                            <TextView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:background="@drawable/status_online_off"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginRight="10dp"
+                                />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="7dp"
+                            >
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/profilepic"
+                                app:shapeAppearanceOverlay="@style/circleImageView"
+                                app:strokeColor="#FFC90A"
+                                app:strokeWidth="3dp" />
+                            <TextView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:background="@drawable/status_online_off"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginRight="10dp"
+                                />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="7dp"
+                            >
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/profilepic"
+                                app:shapeAppearanceOverlay="@style/circleImageView"
+                                app:strokeColor="#FFC90A"
+                                app:strokeWidth="3dp" />
+                            <TextView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:background="@drawable/status_online_off"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginRight="10dp"
+                                />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="7dp"
+                            >
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/profilepic"
+                                app:shapeAppearanceOverlay="@style/circleImageView"
+                                app:strokeColor="#FFC90A"
+                                app:strokeWidth="3dp" />
+                            <TextView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:background="@drawable/status_online_off"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginRight="10dp"
+                                />
+                        </RelativeLayout>
 
 
                     </LinearLayout>
@@ -169,11 +238,10 @@
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/home"
                     android:paddingStart="5dp"
                     android:paddingTop="5dp"
                     android:paddingEnd="5dp"
-                    />
+                    android:src="@drawable/home" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -181,6 +249,7 @@
                     android:text="Home"
                     android:textSize="14dp"
                     android:textStyle="bold"
+                    android:textColor="#A39D9D"
 
                     />
 
@@ -199,10 +268,10 @@
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/search"
                     android:paddingStart="5dp"
                     android:paddingTop="3dp"
                     android:paddingEnd="5dp"
+                    android:src="@drawable/search"
 
                     />
 
@@ -212,6 +281,7 @@
                     android:text="Search"
                     android:textSize="14dp"
                     android:textStyle="bold"
+                    android:textColor="#A39D9D"
 
                     />
 
@@ -222,8 +292,8 @@
 
 
         <LinearLayout
-            android:id="@+id/plus"
-            android:layout_width="wrap_content"
+
+            android:layout_width="45dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
@@ -234,10 +304,7 @@
 
             >
 
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/add" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -253,11 +320,10 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/chat"
                 android:paddingStart="3dp"
                 android:paddingTop="3dp"
                 android:paddingEnd="3dp"
-                />
+                android:src="@drawable/chat" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -265,6 +331,7 @@
                 android:text="Chat"
                 android:textSize="14dp"
                 android:textStyle="bold"
+                android:textColor="#A39D9D"
 
                 />
 
@@ -283,10 +350,10 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/user"
                 android:paddingStart="5dp"
                 android:paddingTop="5dp"
                 android:paddingEnd="5dp"
+                android:src="@drawable/user"
 
                 />
 
@@ -296,11 +363,36 @@
                 android:text="Profile"
                 android:textSize="14dp"
                 android:textStyle="bold"
+                android:textColor="#A39D9D"
 
                 />
 
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_horizontal|bottom">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/plus"
+            >
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_margin="1dp"
+
+                android:background="#D3D6D6"
+                android:src="@drawable/add"
+                app:shapeAppearanceOverlay="@style/circleImageView"
+                app:strokeColor="#037369"
+                app:strokeWidth="4dp" /></LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
