@@ -58,6 +58,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10sp"
@@ -101,6 +102,7 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        android:id="@+id/profilepic"
 
                         app:strokeWidth="5dp"
                         app:strokeColor="#86D1CA"
@@ -224,6 +226,7 @@
 
             >
             <CalendarView
+                android:id="@+id/calender"
                 android:layout_width="match_parent"
                 android:layout_marginTop="20dp"
                 android:layout_height="wrap_content"
@@ -251,6 +254,7 @@
                 >
 
                 <TextView
+                    android:id="@+id/t10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -259,6 +263,7 @@
                     android:textSize="20sp"
                     android:background="@drawable/home_option2"/>
                 <TextView
+                    android:id="@+id/t11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -268,6 +273,7 @@
                     android:textSize="20sp"
                     android:background="@drawable/home_option2"/>
                 <TextView
+                    android:id="@+id/t12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"

@@ -1,6 +1,5 @@
 package i212474.a1.i212474
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
@@ -9,52 +8,109 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class page2_Activity_login : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+
+    private lateinit var fireAuth: FirebaseAuth
+    private lateinit var email: EditText
+    private lateinit var pass: EditText
+    private lateinit var dbRef: DatabaseReference
+    private lateinit var database:DatabaseReference
+    private lateinit var user: UserModel
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_page2_login)
+
         val forget: TextView = findViewById(R.id.forget)
         val login: Button = findViewById(R.id.login)
-        var pass: EditText= findViewById(R.id.pass)
-        var email: EditText= findViewById(R.id.email)
+        pass = findViewById(R.id.pass)
+        email = findViewById(R.id.email)
+        fireAuth = FirebaseAuth.getInstance()
+        dbRef = FirebaseDatabase.getInstance().getReference("user")
+
+        email.setText("gen.29dj@gmail.com")
+        pass.setText("12345678")
+
+
         forget.setOnClickListener {
             Toast.makeText(this, "link clicked", Toast.LENGTH_SHORT).show()
         }
-
 
         val signUp = findViewById<TextView>(R.id.create)
         signUp.text = "Sign Up"
         signUp.paintFlags = Paint.UNDERLINE_TEXT_FLAG or signUp.paintFlags
 
         login.setOnClickListener {
+            var check = true
             val password = pass.text.toString()
             val mail = email.text.toString()
-            if(password.isEmpty())
-            {
-                pass.setBackgroundResource(R.drawable.empty_textbox)
+            if (mail.isEmpty()) {
+                email.error = "Please enter email"
+                check = false
             }
-            if(mail.isEmpty())
-            {
-                email.setBackgroundResource(R.drawable.empty_textbox)
+            if (password.isEmpty()) {
+                pass.error = "Please enter password"
+                check = false
             }
-//            if(!password.isEmpty() and !mail.isEmpty())
-//            {
-                val intent = Intent(this, page4_Activity_home::class.java)
-                startActivity(intent)
-//            }
+
+            if (check) {
+                // Query the database to find user by email
+                var nam=""
+                //Toast.makeText(this, "sad", Toast.LENGTH_SHORT).show()
+                fireAuth.signInWithEmailAndPassword(mail,password)
+                    .addOnCompleteListener {
+                        if(it.isSuccessful) {
+                            check=true
+                            val userID = mail.substringBefore('@').replace('.', ' ').replace('_', '2')
+                            database=FirebaseDatabase.getInstance().getReference("user")
+                            database.child(userID).get().addOnSuccessListener {
+                                nam = it.child("count").value.toString()
+
+                            }
+                            if (nam=="1")
+                            {
+                                database.child(userID).child("count").setValue("2")
+                                val intent = Intent(this, page17_Activity_profileView::class.java)
+                                intent.putExtra("USER_ID", userID) // Put the userID as an extra in the Intent
+                                startActivity(intent)
+                            }
+                            else
+                            {
+                                val intent = Intent(this, page4_Activity_home::class.java)
+                                intent.putExtra("USER_ID", userID) // Put the userID as an extra in the Intent
+                                startActivity(intent)
+                            }
+
+
+                        }else
+                        {
+                            check=false
+                            Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+//                val intent = Intent(this, page4_Activity_home::class.java)
+//                intent.putExtra("user", user)
+//                startActivity(intent)
+//                finish() // Finish the login activity
+            }
         }
+
         signUp.setOnClickListener {
             val intent = Intent(this, page3_Activity_create::class.java)
+
             startActivity(intent)
         }
-        val forget1=findViewById<TextView>(R.id.forget)
+
+        val forget1 = findViewById<TextView>(R.id.forget)
         forget1.setOnClickListener {
             val intent = Intent(this, page19_Activity_forgetEmail::class.java)
             startActivity(intent)
         }
-
     }
 }
+

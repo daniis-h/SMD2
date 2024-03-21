@@ -60,68 +60,13 @@
                 android:layout_marginTop="10dp"
                 android:weightSum="4">
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <ImageView
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:src="@drawable/cover"
+                    android:id="@+id/cover"
+                    />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="#F59BD3CE" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="#78B1AC" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="#78B1AC" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="#F59BD3CE" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="#F59BD3CE" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="#78B1AC" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="#78B1AC" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="#F59BD3CE" />
-                </LinearLayout>
 
             </LinearLayout>
             <ScrollView
@@ -142,14 +87,16 @@
                     android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/name17"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:gravity="center"
                     android:text="Ali"
                     android:textColor="#227E75"
                     android:textSize="20dp"
                     android:textStyle="bold" />
                     <TextView
+                        android:id="@+id/city17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -470,234 +417,20 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="165dp"
+                        android:layout_height="wrap_content"
 
                         android:orientation="horizontal"
                         android:paddingLeft="7dp"
                         android:paddingRight="7dp"
+                        android:id="@+id/reviewFill"
 
                         >
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="105dp"
-                            android:padding="15dp"
-                            android:layout_marginRight="5dp"
-                            android:background="@drawable/home_option2"
-                            android:orientation="vertical"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:text="John Cooper"
-                                android:textColor="#CFD6D5"
-                                android:textSize="18dp"
-                                />
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="3dp"
-                                android:gravity="center"
-                                >
-
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/star"
 
 
-                                    />
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/star"
-
-                                    android:layout_marginStart="2sp"
-                                    />
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/star"
-
-                                    android:layout_marginStart="2sp"
-                                    />
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/star"
-
-                                    android:layout_marginStart="2sp"
-                                    />
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/empty_star"
-
-                                    android:layout_marginStart="2sp"
-                                    />
-
-                            </LinearLayout>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:text="John provided excellent \n
-Prototyping Techniques \n
-and insights. I highly"
-                                android:textColor="#3D5A57"
-                                android:textSize="10dp"
-                                android:textStyle="bold"
-                                />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="105dp"
-                            android:padding="15dp"
-                            android:layout_marginRight="5dp"
-                            android:background="@drawable/home_option2"
-                            android:orientation="vertical"
-                            android:layout_marginLeft="2dp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:text="Martina Watson"
-                                android:textColor="#CFD6D5"
-                                android:textSize="18dp"
-                                />
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="3dp"
-                                android:gravity="center"
-                                >
-
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/star"
 
 
-                                    />
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/star"
 
-                                    android:layout_marginStart="2sp"
-                                    />
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/star"
-
-                                    android:layout_marginStart="2sp"
-                                    />
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/empty_star"
-
-                                    android:layout_marginStart="2sp"
-                                    />
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/empty_star"
-
-                                    android:layout_marginStart="2sp"
-                                    />
-
-                            </LinearLayout>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:text="Her tips were valuable.\n
-Would love to connect \n
-again\n"
-                                android:textColor="#3D5A57"
-                                android:textSize="10dp"
-                                android:textStyle="bold"
-                                />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="105dp"
-                            android:padding="15dp"
-                            android:layout_marginRight="5dp"
-                            android:background="@drawable/home_option2"
-                            android:orientation="vertical"
-                            android:layout_marginLeft="2dp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:text="Emma"
-                                android:textColor="#CFD6D5"
-                                android:textSize="18dp"
-                                />
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="3dp"
-                                android:gravity="center"
-                                >
-
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/star"
-
-
-                                    />
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/star"
-
-                                    android:layout_marginStart="2sp"
-                                    />
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/star"
-
-                                    android:layout_marginStart="2sp"
-                                    />
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/empty_star"
-
-                                    android:layout_marginStart="2sp"
-                                    />
-                                <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/empty_star"
-
-                                    android:layout_marginStart="2sp"
-                                    />
-
-                            </LinearLayout>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:text="    Impressive session.  "      android:textColor="#3D5A57"
-                                android:textSize="10dp"
-                                android:textStyle="bold"
-                                />
-                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -905,6 +638,7 @@ again\n"
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:id="@+id/profilepic"
             android:layout_marginTop="5dp"
             android:src="@drawable/profilepic"
             app:shapeAppearanceOverlay="@style/circleImageView"

@@ -3,6 +3,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="#B9EAE5"
     android:orientation="vertical">
 
@@ -12,12 +13,14 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/footer"
         android:orientation="vertical"
+        android:id="@+id/root"
         android:weightSum="2">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.3"
+            android:id="@+id/header"
             android:background="@drawable/profile_view"
             android:orientation="horizontal">
 
@@ -37,6 +40,7 @@
                 android:layout_marginTop="30dp"
                 android:text="John Cooper"
                 android:textColor="@color/white"
+                android:id="@+id/name"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
@@ -74,163 +78,52 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.7"
-            android:gravity="bottom"
+            android:gravity="top"
             android:orientation="vertical"
-            android:padding="2dp">
+            android:padding="2dp"
+            android:weightSum="7"
+            android:layout_marginTop="5dp"
+            >
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="6"
+                android:scrollbars="vertical"
+                android:orientation="vertical"
+                >
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/scroll"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_gravity="bottom"
+                        android:id="@+id/thechats">
+
+
+                    </LinearLayout>
+                </ScrollView>
+
+
+                <!--                android:scrollbars="vertical"-->
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/recyler"-->
+<!--                />-->
+
+            </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:gravity="right"
-                android:orientation="vertical"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hello, you there?"
-                    android:background="@drawable/home_options"
-                    android:textSize="20sp"
-                    android:padding="7dp"
-
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10:10"
-                    android:textColor="#817F7F"
-                    android:textSize="11sp"
-                    android:padding="2dp"
-                    android:textStyle="bold"
-
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                android:weightSum="2"
-                >
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-
-                    app:strokeWidth="3dp"
-                    app:strokeColor="#FFC90A"
-                    app:shapeAppearanceOverlay="@style/circleImageView"
-                    android:src="@drawable/profilepic"
-                    />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Yes"
-                        android:background="@drawable/text_boarder"
-                        android:textSize="20sp"
-                        android:padding="7dp"
-
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10:10"
-                        android:textColor="#817F7F"
-                        android:textSize="11sp"
-                        android:padding="2dp"
-                        android:textStyle="bold"
-
-                        />
-
-                </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:gravity="right"
-                android:orientation="vertical"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="I need your guidance"
-                    android:background="@drawable/home_options"
-                    android:textSize="20sp"
-                    android:padding="7dp"
-
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10:10"
-                    android:textColor="#817F7F"
-                    android:textSize="11sp"
-                    android:padding="2dp"
-                    android:textStyle="bold"
-
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                android:weightSum="2"
-                >
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-
-                    app:strokeWidth="3dp"
-                    app:strokeColor="#FFC90A"
-                    app:shapeAppearanceOverlay="@style/circleImageView"
-                    android:src="@drawable/profilepic"
-                    />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="how can i help you?"
-                        android:background="@drawable/text_boarder"
-                        android:textSize="20sp"
-                        android:padding="7dp"
-
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10:10"
-                        android:textColor="#817F7F"
-                        android:textSize="11sp"
-                        android:padding="2dp"
-                        android:textStyle="bold"
-
-                        />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -263,6 +156,7 @@
                 android:hint="Type something..."
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="7dp"
+                android:id="@+id/message"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -276,6 +170,7 @@
                 android:layout_marginTop="10dp"
                 android:padding="6dp"
                 android:src="@drawable/camera" />
+
                 <ImageView
                     android:id="@+id/mic"
                     android:layout_width="40dp"
@@ -296,7 +191,7 @@
 
         </LinearLayout>
 
-
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -480,6 +375,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/plus"
+
             >
 
             <com.google.android.material.imageview.ShapeableImageView

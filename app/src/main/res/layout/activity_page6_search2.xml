@@ -50,6 +50,7 @@
                 android:text="Filter"
                 android:textColor="#279187"
                 android:background="@drawable/home_options"
+                android:id="@+id/filter"
 
                 android:inputType="none"
                 android:textSize="16sp"

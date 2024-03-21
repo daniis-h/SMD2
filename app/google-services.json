@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "614077939622",
+    "project_id": "mentor-me-6558f",
+    "storage_bucket": "mentor-me-6558f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614077939622:android:cc5a9ed71b77f1cd0bd967",
+        "android_client_info": {
+          "package_name": "i212474.a1.i212474"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3KpfFVDocGNT2uSkVuyhFXaqRX4YiPhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
