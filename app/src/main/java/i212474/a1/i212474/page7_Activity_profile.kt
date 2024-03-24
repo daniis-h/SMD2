@@ -71,6 +71,20 @@ class page7_Activity_profile : AppCompatActivity() {
     }
 
     private fun fetchUser(userID: String) {
+
+        //*************** finding disc ******
+        val namebase1 = FirebaseDatabase.getInstance().getReference("mentor")
+        namebase1.child(userID.toString()).get().addOnSuccessListener { dataSnapshot ->
+
+            val disc = findViewById<TextView>(R.id.disc)
+            disc.text = dataSnapshot.child("disc").value.toString()
+            val picM:String=dataSnapshot.child("uri").value.toString()
+            if (!picM.isNullOrEmpty())
+            {
+                defulturi=picM
+
+            }
+        }
         //********** finding name *******
         val namebase = FirebaseDatabase.getInstance().getReference("user")
         val nameTextView = findViewById<TextView>(R.id.name)
@@ -90,13 +104,7 @@ class page7_Activity_profile : AppCompatActivity() {
                     .into(pic)
         }
 
-        //*************** finding disc ******
-        val namebase1 = FirebaseDatabase.getInstance().getReference("mentor")
-        namebase1.child(userID.toString()).get().addOnSuccessListener { dataSnapshot ->
 
-            val disc = findViewById<TextView>(R.id.disc)
-            disc.text = dataSnapshot.child("disc").value.toString()
-        }
 
 
     }

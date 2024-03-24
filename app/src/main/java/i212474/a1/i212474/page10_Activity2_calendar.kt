@@ -137,6 +137,13 @@ class page10_Activity2_calendar : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().getReference("mentor")
         database.child(userID).get().addOnSuccessListener {
             val uid = it.child("mail").value.toString()
+            val picM:String=it.child("uri").value.toString()
+            if (!picM.isNullOrEmpty())
+            {
+                defulturi=picM
+
+            }
+
             //********** finding name *******
             val namebase = FirebaseDatabase.getInstance().getReference("user")
             val nameTextView = findViewById<TextView>(R.id.name)

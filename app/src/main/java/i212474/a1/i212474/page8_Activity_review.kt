@@ -99,6 +99,16 @@ class page8_Activity_review : AppCompatActivity() {
 
     private fun fetchUser(userID: String) {
 
+        val namebase1 = FirebaseDatabase.getInstance().getReference("mentor")
+        namebase1.child(userID.toString()).get().addOnSuccessListener { dataSnapshot ->
+            val picM:String=dataSnapshot.child("uri").value.toString()
+            if (!picM.isNullOrEmpty())
+            {
+                defulturi=picM
+
+            }
+        }
+
             //********** finding name *******
             val namebase = FirebaseDatabase.getInstance().getReference("user")
             val nameTextView = findViewById<TextView>(R.id.name)

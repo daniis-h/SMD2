@@ -267,6 +267,15 @@ class page11_Activity2_chats : AppCompatActivity() {
             val itemView = layoutInflater.inflate(R.layout.comm_chat, null)
 
             // Populate the item view with data
+            val namebase1 = FirebaseDatabase.getInstance().getReference("mentor")
+            namebase1.child(data).get().addOnSuccessListener { dataSnapshot ->
+                val picM:String=dataSnapshot.child("uri").value.toString()
+                if (!picM.isNullOrEmpty())
+                {
+                    defulturi=picM
+
+                }
+            }
             val namebase = FirebaseDatabase.getInstance().getReference("user")
 
 
@@ -323,13 +332,24 @@ class page11_Activity2_chats : AppCompatActivity() {
             namebase.child(data.rid.toString()).get().addOnSuccessListener { dataSnapshot ->
                 val pic= itemView.findViewById<com.google.android.material.imageview.ShapeableImageView>(R.id.profilepic)
                 val name=dataSnapshot.child("namee").value.toString()
-                val uri=dataSnapshot.child("imguri").value.toString()
+                var uri=dataSnapshot.child("imguri").value.toString()
                 Log.d("MyTag:", "name: "+name.toString())
                 Log.d("MyTag:", "uri: "+uri.toString())
-                if(name.isNullOrEmpty())
+                if(name!="null")
                     nameTextView.text = name
                 else
                     nameTextView.text = data.rid
+
+                val namebase1 = FirebaseDatabase.getInstance().getReference("mentor")
+                namebase1.child(data.rid).get().addOnSuccessListener { datanapshot ->
+
+                    val picM:String=datanapshot.child("uri").value.toString()
+                    if (!picM.isNullOrEmpty())
+                    {
+                        defulturi=picM
+                        uri=picM
+                    }
+                }
                 if(uri.toString().length<15)
                     Glide.with(this)
                         .load(defulturi)

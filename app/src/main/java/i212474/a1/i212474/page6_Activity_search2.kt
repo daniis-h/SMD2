@@ -60,8 +60,9 @@ class page6_Activity_search2 : AppCompatActivity() {
                     val price = mntosnap.child("price").getValue(String::class.java)
                     val disc = mntosnap.child("disc").getValue(String::class.java)
                     val status = mntosnap.child("status").getValue(String::class.java)
+                    val uri=mntosnap.child("uri").getValue(String::class.java)
 
-                    val mdata = Mentors(name, status, price, disc)
+                    val mdata = Mentors(name, status, price, disc,uri)
                     mntrlist.add(mdata)
                     //Toast.makeText(this@page4_Activity_home,mntrlist.size.toString(), Toast.LENGTH_SHORT).show()
 
@@ -174,6 +175,7 @@ class page6_Activity_search2 : AppCompatActivity() {
             namebase2.child(mentor.mail.toString()).get().addOnSuccessListener { dataSnapshot ->
                 namee = dataSnapshot.child("namee").value.toString()}
             Log.d("Search",namee)
+            val picM:String=mentor.uri.toString()
 
             if(namee.contains(search)) {
                 if (mentor.mail.toString() != user.toString()) {
@@ -183,7 +185,6 @@ class page6_Activity_search2 : AppCompatActivity() {
 
                     // Retrieve img2 within the itemView
                     val img2 = itemView.findViewById<ImageView>(R.id.like)
-
 
                     // Populate the item view with mentor data
 
@@ -198,6 +199,11 @@ class page6_Activity_search2 : AppCompatActivity() {
 
                             val pic = itemView.findViewById<ImageView>(R.id.profilepic)
                             var uri = dataSnapshot.child("imguri").value.toString()
+                            if (!picM.isNullOrEmpty())
+                            {
+                                defulturi=picM
+                                uri=picM.toString()
+                            }
                             if (uri.length > 10)
                                 Glide.with(this)
                                     .load(uri)

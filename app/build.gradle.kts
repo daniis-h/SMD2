@@ -56,6 +56,8 @@ dependencies {
     implementation("com.google.firebase:protolite-well-known-types:18.0.0")
     implementation("com.google.firebase:firebase-messaging:23.4.1")
     implementation("com.android.volley:volley:1.2.1")
+    implementation("io.agora.rtc:full-sdk:12-15-ci-test-2")
+    implementation("io.agora.rtc:full-sdk:12-15-ci-test-2")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 
     testImplementation("junit:junit:4.13.2")
@@ -65,8 +67,6 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.5.2")
     androidTestImplementation("androidx.test:rules:1.5.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
-    implementation("io.agora.rtc:voice-sdk:4.2.6")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")

@@ -3,11 +3,14 @@ package i212474.a1.i212474
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -37,6 +40,7 @@ class page4_Activity_home : AppCompatActivity() {
 
 
     lateinit var search : ImageView
+    private lateinit var sharedPreferences: SharedPreferences
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -155,6 +159,16 @@ class page4_Activity_home : AppCompatActivity() {
         val notify=findViewById<com.google.android.material.imageview.ShapeableImageView>(R.id.noti)
         notify.setOnClickListener{
             val intent=Intent(this, page24_Activity_notificatons::class.java)
+            intent.putExtra("USER_ID", userID)
+            startActivity(intent)
+        }
+        val logout=findViewById<Button>(R.id.logout)
+        logout.setOnClickListener {
+            sharedPreferences = getSharedPreferences("my_shared_preferences", Context.MODE_PRIVATE)
+
+            // Change the stored value to an empty string
+            sharedPreferences.edit().putString("Login", "").apply()
+            val intent=Intent(this, page2_Activity_login::class.java)
             intent.putExtra("USER_ID", userID)
             startActivity(intent)
         }

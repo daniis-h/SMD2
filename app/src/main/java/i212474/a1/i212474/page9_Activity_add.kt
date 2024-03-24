@@ -1,7 +1,9 @@
 package i212474.a1.i212474
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
@@ -9,9 +11,12 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import java.util.UUID
 
 class page9_Activity_add : AppCompatActivity() {
     var option = arrayOf("Available", "Not Available")
@@ -24,6 +29,15 @@ class page9_Activity_add : AppCompatActivity() {
     private  lateinit var ename: EditText
     private  lateinit var edisc: EditText
     private  lateinit var dbRef: DatabaseReference
+    private lateinit var imageuri: Uri
+
+    private val selectimg = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        if (it != null) {
+            imageuri = it
+            saveimage()
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,9 +102,7 @@ class page9_Activity_add : AppCompatActivity() {
         val pic = findViewById<LinearLayout>(R.id.photo)
 
         pic.setOnClickListener {
-            val intent = Intent(this, page14_Activity_camera::class.java)
-            intent.putExtra("USER_ID", userID)
-            startActivity(intent)
+            selectimg.launch("image/*")
         }
         val profile=findViewById<LinearLayout>(R.id.profile)
         profile.setOnClickListener {
@@ -98,6 +110,37 @@ class page9_Activity_add : AppCompatActivity() {
             intent.putExtra("USER_ID", userID)
             startActivity(intent)
         }
+
+    }
+
+    private fun saveimage() {
+        val randomString = "mentor_${UUID.randomUUID()}"
+        val storeref = FirebaseStorage.getInstance().getReference("Pictures")
+            .child(user)
+            .child(randomString)
+
+        Log.d("MyTag", "entered save image function")
+
+        storeref.putFile(imageuri!!)
+            .addOnSuccessListener {
+                storeref.downloadUrl.addOnSuccessListener {
+                    //save Path
+
+
+                    Toast.makeText(
+                        this,
+                        "Sending picture",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    imageuri=it
+
+                }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show()
+                    }
+            }
+
+        Log.d("MyTag", "out of function")
     }
 
     private fun saveUserDetails() {
@@ -117,7 +160,7 @@ class page9_Activity_add : AppCompatActivity() {
 
         if (check == true) {
             if (name.isEmpty()) {
-                val mentor = Mentors(user,status,"$1500/session",disc)
+                val mentor = Mentors(user,status,"$1500/session",disc,imageuri.toString())
                 dbRef.child(user).setValue(mentor)
                     .addOnCompleteListener {
                         Toast.makeText(this, "Mentor Added: "+user, Toast.LENGTH_SHORT).show()
@@ -135,7 +178,7 @@ class page9_Activity_add : AppCompatActivity() {
             }
             else
             {
-                val mentor = Mentors(name,status,"$1500/session",disc)
+                val mentor = Mentors(name,status,"$1500/session",disc,imageuri.toString())
                 dbRef.child(name).setValue(mentor)
                     .addOnCompleteListener {
                         Toast.makeText(this, "Mentor Added: "+name, Toast.LENGTH_SHORT).show()

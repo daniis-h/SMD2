@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.Rect
 import android.media.AudioAttributes
 import android.media.MediaPlayer
@@ -12,6 +13,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +44,7 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.IOException
 import org.json.JSONObject
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -49,6 +52,7 @@ import java.util.Locale
 import java.util.UUID
 
 private const val MIC_PERMISSION_CODE = 200
+private const val Camera_PERMISSION_CODE = 100
 private const val REQUEST_CODE_READ_EXTERNAL_STORAGE_PERMISSION = 3009
 /*
 * message type =1
@@ -65,6 +69,7 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
     private var msgid: String = ""
     var audioBool = false
     private lateinit var imageuri: Uri
+    private lateinit var fileuri: Uri
 
 
     private var recorder: MediaRecorder? = null
@@ -76,6 +81,14 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
             saveimage()
         }
     }
+    private val selectfile = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        if (it != null) {
+            fileuri = it
+            savefile()
+        }
+    }
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -164,12 +177,16 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
         val vidcall = findViewById<ImageView>(R.id.vidaCal)
         vidcall.setOnClickListener {
             val intent = Intent(this, page22_Activity_vidCall::class.java)
+            intent.putExtra("USER_ID", user)
+            intent.putExtra("PROFILE", mentorID.toString())
             startActivity(intent)
         }
 
         val call = findViewById<ImageView>(R.id.call)
         call.setOnClickListener {
             val intent = Intent(this, page23_Activity_audioCall::class.java)
+            intent.putExtra("USER_ID", user)
+            intent.putExtra("PROFILE", mentorID.toString())
             startActivity(intent)
         }
 
@@ -202,6 +219,17 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
         image.setOnClickListener {
             selectimg.launch("image/*")     //uploading to fire base
 
+        }
+        val file=findViewById<ImageView>(R.id.files)
+        file.setOnClickListener {
+            selectfile.launch("*/*")
+        }
+
+        val camera=findViewById<ImageView>(R.id.camera)
+
+        camera.setOnClickListener{
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(takePictureIntent, Camera_PERMISSION_CODE)
         }
 
 
@@ -246,6 +274,23 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
 ////////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////////////////
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == Camera_PERMISSION_CODE && resultCode == RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            imageuri = getImageUri(imageBitmap)
+            sendMessage(personID,3,imageuri.toString())
+        }
+    }
+
+    private fun getImageUri(bitmap: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(contentResolver, bitmap, "Image", null)
+        return Uri.parse(path)
+    }
 
     private fun isMic(): Boolean {
         if (this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MICROPHONE))
@@ -373,6 +418,11 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
                 )
                 sendNotification("Picture")
             }
+            else if (type == 4) {
+                chat = chatMessageModel(messageId!!, personID, user, time, "", "", "", "",messageuri, "4"
+                )
+                sendNotification("Files")
+            }
             Log.d("My picture", messageuri)
 
             database.child(messageId!!).setValue(chat)
@@ -421,6 +471,7 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
                             val messgid = chatSnapshot.child("msgID").getValue(String::class.java)
                             val audio = chatSnapshot.child("audio").getValue(String::class.java)
                             val pic = chatSnapshot.child("picture").getValue(String::class.java)
+                            val file = chatSnapshot.child("file").getValue(String::class.java)
                             val type = chatSnapshot.child("type").getValue(String::class.java)
                             val namebase = FirebaseDatabase.getInstance().getReference("user")
                             var uri: String = ""
@@ -441,8 +492,7 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
                                 uri,
                                 tmsg.toString(),
                                 audio.toString(),
-                                pic.toString(),
-                                "",
+                                pic.toString(), file.toString(),
                                 type.toString()
                             )
                             chatlist.add(booking)
@@ -505,6 +555,7 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
                 val enter = findViewById<EditText>(R.id.message)
 
 
+
                 if (chat.type == "1") {
                     msg.text = chat.message
 
@@ -523,6 +574,20 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
                     val params = img.layoutParams
                     params.width = 425
                     params.height = 425
+                    img.layoutParams = params
+                    msg.setPadding(0, 0, 0, 0) // Set padding to 0 for all sides
+                    msg.textSize = 0f // Set text size to 0
+
+
+                }
+                else if (chat.type == "4") {
+                    val urii = chat.file
+                    Glide.with(itemView)
+                        .load(urii)
+                        .into(img)
+                    val params = img.layoutParams
+                    params.width = 425
+                    params.height = 275
                     img.layoutParams = params
                     msg.setPadding(0, 0, 0, 0) // Set padding to 0 for all sides
                     msg.textSize = 0f // Set text size to 0
@@ -556,8 +621,11 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
 
 
                 }
+                img.setOnClickListener{
+                    del.text = ""
+                }
 
-                msg.setOnClickListener {
+                msg.setOnClickListener {        //play voice
                     edit.text = ""
                     del.text = ""
                     if (chat.type == "2") {
@@ -600,11 +668,17 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
                         val storageRef =
                             FirebaseStorage.getInstance().getReferenceFromUrl(chat.audio)
                         storageRef.delete()
-                    } else if (chat.type == "2") {
-                        val storageRef =
-                            FirebaseStorage.getInstance().getReferenceFromUrl(chat.picture)
-                        storageRef.delete()
                     }
+//                    else if (chat.type == "3") {
+//                        val storageRef =
+//                            FirebaseStorage.getInstance().getReferenceFromUrl(chat.picture)
+//                        storageRef.delete()
+//                    }
+//                    else if (chat.type == "4") {
+//                        val storageRef =
+//                            FirebaseStorage.getInstance().getReferenceFromUrl(chat.file)
+//                        storageRef.delete()
+//                    }
 
                 }
 
@@ -651,7 +725,30 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
                     msg.textSize = 0f // Set text size to 0
 
                 }
+                else if (chat.type == "4") {
+                    val urii = chat.file
+                    Glide.with(itemView)
+                        .load(urii)
+                        .into(img)
+                    val params = img.layoutParams
+                    params.width = 425
+                    params.height = 275
+                    img.layoutParams = params
+                    msg.setPadding(0, 0, 0, 0) // Set padding to 0 for all sides
+                    msg.textSize = 0f // Set text size to 0
+
+                }
                 time.text = chat.time.toString()
+                val namebase1 = FirebaseDatabase.getInstance().getReference("mentor")
+                namebase1.child(chat.id).get().addOnSuccessListener { dataSnapshot ->
+
+                    val picM:String=dataSnapshot.child("uri").value.toString()
+                    if (!picM.isNullOrEmpty())
+                    {
+                        defulturi=picM
+
+                    }
+                }
                 if (chat.uri.length > 10)
                     Glide.with(this)
                         .load(chat.uri)
@@ -754,6 +851,37 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
 
         }
     }
+    private fun savefile() {
+        val randomString = "chat_${UUID.randomUUID()}"
+        val storeref = FirebaseStorage.getInstance().getReference("files")
+            .child(user)
+            .child(randomString)
+
+        Log.d("MyTag", "entered save file function")
+
+        storeref.putFile(fileuri!!)
+            .addOnSuccessListener {
+                storeref.downloadUrl.addOnSuccessListener {
+                    //save Path
+
+
+                    Toast.makeText(
+                        this,
+                        "Sending picture",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    sendMessage(personID, 4, it.toString())
+
+                }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show()
+                    }
+            }
+
+        Log.d("MyTag", "out of function")
+    }
+
+
 
     private fun sendNotification(message: String) {
         // Variables to hold username and other user's token

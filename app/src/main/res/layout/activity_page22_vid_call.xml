@@ -32,9 +32,14 @@
                 android:background="#A19D9D"
                 android:orientation="vertical"
                 android:padding="10dp"
-                android:id="@+id/remortUser"
                 >
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/remortuser"
+                    >
 
+                </FrameLayout>
 
 
                 <LinearLayout

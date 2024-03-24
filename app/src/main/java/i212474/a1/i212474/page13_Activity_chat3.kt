@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.Rect
 import android.media.AudioAttributes
 import android.media.MediaPlayer
@@ -12,6 +13,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +43,7 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.IOException
 import org.json.JSONObject
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -48,6 +51,7 @@ import java.util.Locale
 import java.util.UUID
 
 private const val MIC_PERMISSION_CODE = 200
+private const val Camera_PERMISSION_CODE = 100
 class page13_Activity_chat3 : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var user: String
@@ -56,6 +60,7 @@ class page13_Activity_chat3 : AppCompatActivity() {
     private var msgid:String=""
     var audioBool= false
     private lateinit var imageuri: Uri
+    private lateinit var fileuri: Uri
 
 
 
@@ -66,6 +71,12 @@ class page13_Activity_chat3 : AppCompatActivity() {
         if (it != null) {
             imageuri = it
             saveimage()
+        }
+    }
+    private val selectfile = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        if (it != null) {
+            fileuri = it
+            savefile()
         }
     }
     @SuppressLint("MissingInflatedId")
@@ -83,17 +94,8 @@ class page13_Activity_chat3 : AppCompatActivity() {
 
         val assignAnID = mentorID
 
-//------------------------clicks-----------------
-        val send=findViewById<ImageView>(R.id.send_msg)
-        send.setOnClickListener{
-            val msg = findViewById<EditText>(R.id.message)
-            if(msg.text.isNotEmpty())
-            {
-                sendMessage(mentorID.toString(),1,"")
-            }
-            LoadMsg(assignAnID.toString())
 
-        }
+
 
 
         val databaseReference = FirebaseDatabase.getInstance().getReference("Commchat")
@@ -101,6 +103,14 @@ class page13_Activity_chat3 : AppCompatActivity() {
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 LoadMsg(assignAnID.toString())
+                //--------------scroll
+                val scrollView = findViewById<ScrollView>(R.id.scroll) // Replace with your ScrollView ID
+
+                scrollView.post {
+                    run {
+                        scrollView.fullScroll(ScrollView.FOCUS_DOWN)
+                    }
+                }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -110,7 +120,7 @@ class page13_Activity_chat3 : AppCompatActivity() {
         })
 
 
-        LoadMsg(assignAnID.toString())
+
 
 
         // Create an ArrayList of CommCommchatMessageModel objects
@@ -191,6 +201,18 @@ class page13_Activity_chat3 : AppCompatActivity() {
             selectimg.launch("image/*")     //uploading to fire base
 
         }
+        val file=findViewById<ImageView>(R.id.files)
+        file.setOnClickListener {
+            selectfile.launch("*/*")
+        }
+        val camera=findViewById<ImageView>(R.id.camera)
+
+        camera.setOnClickListener{
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(takePictureIntent, Camera_PERMISSION_CODE)
+        }
+
+
 
 
         //--------------keyboard open hide footer
@@ -319,7 +341,22 @@ class page13_Activity_chat3 : AppCompatActivity() {
             }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
+        if (requestCode == Camera_PERMISSION_CODE && resultCode == RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            imageuri = getImageUri(imageBitmap)
+            sendMessage(personID,3,imageuri.toString())
+        }
+    }
+
+    private fun getImageUri(bitmap: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(contentResolver, bitmap, "Image", null)
+        return Uri.parse(path)
+    }
 
 
 
@@ -346,6 +383,11 @@ class page13_Activity_chat3 : AppCompatActivity() {
             else if(type==3){
                 chat = CommchatMessageModel(messageId!!,user, time, "","", "", messageuri,"","3")
                 sendNotification("Picture")
+            }
+            else if (type == 4) {
+                chat = CommchatMessageModel(messageId!!, user, time, "", "", "", "",messageuri, "4"
+                )
+                sendNotification("Files")
             }
             Log.d("My picture", messageuri)
 
@@ -395,6 +437,7 @@ class page13_Activity_chat3 : AppCompatActivity() {
                             val messgid=chatSnapshot.child("msgID").getValue(String::class.java)
                             val audio=chatSnapshot.child("audio").getValue(String::class.java)
                             val pic=chatSnapshot.child("picture").getValue(String::class.java)
+                            val file = chatSnapshot.child("file").getValue(String::class.java)
                             val type=chatSnapshot.child("type").getValue(String::class.java)
                             val namebase = FirebaseDatabase.getInstance().getReference("user")
                             var uri:String=""
@@ -486,6 +529,20 @@ class page13_Activity_chat3 : AppCompatActivity() {
 
 
                 }
+                else if (chat.type == "4") {
+                    val urii = chat.file
+                    Glide.with(itemView)
+                        .load(urii)
+                        .into(img)
+                    val params = img.layoutParams
+                    params.width = 425
+                    params.height = 275
+                    img.layoutParams = params
+                    msg.setPadding(0, 0, 0, 0) // Set padding to 0 for all sides
+                    msg.textSize = 0f // Set text size to 0
+
+
+                }
                 time.text=chat.time.toString()
 
                 Log.d("MyTag:", chat.message.toString())
@@ -503,6 +560,9 @@ class page13_Activity_chat3 : AppCompatActivity() {
                         return true // Return true to consume the long-click event
                     }
                 })
+                img.setOnClickListener{
+                    del.text = ""
+                }
 
                 edit.setOnClickListener {
                     edit.text=""
@@ -558,9 +618,14 @@ class page13_Activity_chat3 : AppCompatActivity() {
                         val storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(chat.audio)
                         storageRef.delete()
                     }
-                    else if(chat.type=="2")
+                    else if(chat.type=="3")
                     {
                         val storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(chat.picture)
+                        storageRef.delete()
+                    }
+                    else if (chat.type == "4") {
+                        val storageRef =
+                            FirebaseStorage.getInstance().getReferenceFromUrl(chat.file)
                         storageRef.delete()
                     }
 
@@ -610,15 +675,36 @@ class page13_Activity_chat3 : AppCompatActivity() {
                     msg.textSize = 0f // Set text size to 0
 
                 }
+                else if (chat.type == "4") {
+                    val urii = chat.file
+                    Glide.with(itemView)
+                        .load(urii)
+                        .into(img)
+                    val params = img.layoutParams
+                    params.width = 425
+                    params.height = 275
+                    img.layoutParams = params
+                    msg.setPadding(0, 0, 0, 0) // Set padding to 0 for all sides
+                    msg.textSize = 0f // Set text size to 0
+
+                }
                 time.text=chat.time.toString()
-                if(chat.uri.length>10)
-                    Glide.with(this)
-                        .load(chat.uri)
-                        .into(pic)
-                else
-                    Glide.with(this)
-                        .load(defulturi)
-                        .into(pic)
+                val namebase = FirebaseDatabase.getInstance().getReference("user")
+                Log.d("Chat id:", chat.id)
+                namebase.child(chat.id.toString()).get().addOnSuccessListener { dataSnapshot ->
+
+                    val u = dataSnapshot.child("imguri").value.toString()
+                    Log.d("Chat uri:", u.toString())
+                    if(u.length<10)
+                        Glide.with(itemView)
+                            .load(defulturi)
+                            .into(pic)
+                    else
+                        Glide.with(itemView)
+                            .load(u)
+                            .into(pic)
+            }
+
                 msg.setOnClickListener {
                     if(chat.type=="2")
                     {
@@ -650,11 +736,7 @@ class page13_Activity_chat3 : AppCompatActivity() {
             }
         }
 
-        val scrollView = findViewById<ScrollView>(R.id.scroll) // Replace with your ScrollView ID
 
-        scrollView.post {
-            scrollView.fullScroll(ScrollView.FOCUS_DOWN)
-        }
         Log.d("MyTag:", "out function")
 
     }
@@ -693,6 +775,35 @@ class page13_Activity_chat3 : AppCompatActivity() {
 
         Log.d("MyTag", "out of function")
     }
+    private fun savefile() {
+        val randomString = "chat_${UUID.randomUUID()}"
+        val storeref = FirebaseStorage.getInstance().getReference("files")
+            .child(user)
+            .child(randomString)
+
+        Log.d("MyTag", "entered save file function")
+
+        storeref.putFile(fileuri!!)
+            .addOnSuccessListener {
+                storeref.downloadUrl.addOnSuccessListener {
+                    //save Path
+
+
+                    Toast.makeText(
+                        this,
+                        "Sending picture",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    sendMessage(personID, 4, it.toString())
+
+                }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show()
+                    }
+            }
+
+        Log.d("MyTag", "out of function")
+    }
 
     private fun fetchUser(userID: String) {
         val namebase = FirebaseDatabase.getInstance().getReference("user")
@@ -707,7 +818,7 @@ class page13_Activity_chat3 : AppCompatActivity() {
                 Glide.with(this)
                     .load(uri)
                     .into(pic)
-                defulturi=uri
+
             }
             else
                 Glide.with(this)

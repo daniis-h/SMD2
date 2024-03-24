@@ -1,8 +1,11 @@
 package i212474.a1.i212474
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -20,6 +23,7 @@ class page2_Activity_login : AppCompatActivity() {
     private lateinit var dbRef: DatabaseReference
     private lateinit var database:DatabaseReference
     private lateinit var user: UserModel
+    private lateinit var sharedPreferences: SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +65,7 @@ class page2_Activity_login : AppCompatActivity() {
             if (check) {
                 // Query the database to find user by email
                 var nam=""
+
                 //Toast.makeText(this, "sad", Toast.LENGTH_SHORT).show()
                 fireAuth.signInWithEmailAndPassword(mail,password)
                     .addOnCompleteListener {
@@ -72,6 +77,8 @@ class page2_Activity_login : AppCompatActivity() {
                                 nam = it.child("count").value.toString()
 
                             }
+                            sharedPreferences = getSharedPreferences("my_shared_preferences", Context.MODE_PRIVATE)
+                            sharedPreferences.edit().putString("Login", userID).apply()
                             if (nam=="1")
                             {
                                 database.child(userID).child("count").setValue("2")
@@ -86,11 +93,11 @@ class page2_Activity_login : AppCompatActivity() {
                                 startActivity(intent)
                             }
 
-
                         }else
                         {
                             check=false
                             Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                            Log.d("error",it.exception.toString())
                         }
                     }
 //                val intent = Intent(this, page4_Activity_home::class.java)
