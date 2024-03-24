@@ -48,12 +48,14 @@ class page16_Activity2_profile : AppCompatActivity() {
 
         autoCompletecoutry = findViewById(R.id.coutry)
         autoCompletecity = findViewById(R.id.cityy)
+        
 
         adaptercountry = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, country)
         autoCompletecoutry?.setAdapter(adaptercountry)
 
         autoCompletecoutry?.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
             val s_country = parent.getItemAtPosition(position).toString()
+            autoCompletecoutry?.setText("")
             //Toast.makeText(applicationContext, "Item: $s_country", Toast.LENGTH_SHORT).show()
             if (s_country == "Pakistan") {
                 adaptercity =
@@ -66,6 +68,7 @@ class page16_Activity2_profile : AppCompatActivity() {
                 autoCompletecity?.setAdapter(adaptercity)
             }
         })
+
         var mail:String=""
         var pass:String=""
         var img:String=""

@@ -416,12 +416,13 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
             } else if (type == 3) {
                 chat = chatMessageModel(messageId!!, personID, user, time, "", "", "", messageuri, "", "3"
                 )
-                sendNotification("Picture")
+                //sendNotification("Picture")
             }
             else if (type == 4) {
                 chat = chatMessageModel(messageId!!, personID, user, time, "", "", "", "",messageuri, "4"
                 )
-                sendNotification("Files")
+                //sendNotification("Files")
+
             }
             Log.d("My picture", messageuri)
 
