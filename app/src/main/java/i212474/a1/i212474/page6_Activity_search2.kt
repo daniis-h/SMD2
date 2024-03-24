@@ -199,7 +199,7 @@ class page6_Activity_search2 : AppCompatActivity() {
 
                             val pic = itemView.findViewById<ImageView>(R.id.profilepic)
                             var uri = dataSnapshot.child("imguri").value.toString()
-                            if (!picM.isNullOrEmpty())
+                            if (picM[0]=='h')
                             {
                                 defulturi=picM
                                 uri=picM.toString()

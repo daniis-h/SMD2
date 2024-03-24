@@ -340,16 +340,16 @@ class page11_Activity2_chats : AppCompatActivity() {
                 else
                     nameTextView.text = data.rid
 
-                val namebase1 = FirebaseDatabase.getInstance().getReference("mentor")
-                namebase1.child(data.rid).get().addOnSuccessListener { datanapshot ->
-
-                    val picM:String=datanapshot.child("uri").value.toString()
-                    if (!picM.isNullOrEmpty())
-                    {
-                        defulturi=picM
-                        uri=picM
-                    }
-                }
+//                val namebase1 = FirebaseDatabase.getInstance().getReference("mentor")
+//                namebase1.child(data.rid).get().addOnSuccessListener { datanapshot ->
+//
+//                    val picM:String=datanapshot.child("uri").value.toString()
+//                    if (picM[0]=='h')
+//                    {
+//                        defulturi=picM
+//                        uri=picM
+//                    }
+//                }
                 if(uri.toString().length<15)
                     Glide.with(this)
                         .load(defulturi)

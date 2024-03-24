@@ -79,7 +79,7 @@ class page7_Activity_profile : AppCompatActivity() {
             val disc = findViewById<TextView>(R.id.disc)
             disc.text = dataSnapshot.child("disc").value.toString()
             val picM:String=dataSnapshot.child("uri").value.toString()
-            if (!picM.isNullOrEmpty())
+            if (picM[0]=='h')
             {
                 defulturi=picM
 
