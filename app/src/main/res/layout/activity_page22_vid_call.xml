@@ -25,13 +25,14 @@
 
 
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
                 android:background="#A19D9D"
                 android:orientation="vertical"
                 android:padding="10dp"
+                android:id="@+id/remortUser"
                 >
 
 
@@ -59,9 +60,10 @@
                     android:layout_height="match_parent"
                     android:gravity="right|bottom"
                     android:padding="15dp">
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="120dp"
                     android:layout_height="150dp"
+                    android:id="@+id/sendervid"
                     android:layout_marginLeft="1dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/imagebox"
@@ -70,11 +72,11 @@
                     android:paddingRight="7dp"
                     android:gravity="right"
                     >
-                </LinearLayout>
+                </FrameLayout>
                 </LinearLayout>
 
 
-            </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -189,7 +191,7 @@ android:id="@+id/cross"
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-
+                    android:id="@+id/leave"
                     android:layout_margin="1dp"
                     android:padding="5dp"
                     android:src="@drawable/baseline_clear_24"

@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="#BAB4B4"
-            android:layout_marginRight="30dp">
+            android:layout_marginRight="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,22 +37,36 @@
                 android:id="@+id/del"
                 android:textSize="20sp"
                 />
+
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello, you there?"
+            android:text=""
             android:background="@drawable/home_options"
             android:textSize="20sp"
             android:padding="7dp"
             android:id="@+id/msg"
 
             />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pic"
+                    />
+            </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

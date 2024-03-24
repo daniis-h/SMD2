@@ -1,11 +1,14 @@
 package i212474.a1.i212474
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.AutoCompleteTextView
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -17,6 +20,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+
+
 
 class page6_Activity_search2 : AppCompatActivity() {
     private lateinit var img2: ImageView
@@ -71,11 +76,46 @@ class page6_Activity_search2 : AppCompatActivity() {
 
 
 //--------------------------all mentor
-        val handler = Handler(Looper.getMainLooper())
-        super.onResume()
-        handler.postDelayed({
-            topMentor(mntrlist)
-        }, 3000)
+        val databaseReference = FirebaseDatabase.getInstance().getReference("users")
+        var searchText=""
+        val searchEditText = findViewById<EditText>(R.id.searchit)
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed for this use case, but required to implement
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not needed for this use case, but required to implement
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                searchText = s.toString()
+                topMentor(mntrlist,searchText)
+            }
+        })
+
+// Add a ValueEventListener to listen for changes in the Commchat node
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                topMentor(mntrlist,"")
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle any errors that occur
+                Log.e("Firebase", "Failed to read value.", databaseError.toException())
+            }
+        })
+
+//---------------------open keyboard
+        val searchView = findViewById<EditText>(R.id.searchit)
+
+// Request focus for the SearchView
+        searchView.requestFocus()
+
+// Show the keyboard
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(searchView, InputMethodManager.SHOW_IMPLICIT)
+
         //Toast.makeText(this@page6_Activity_search2,r, Toast.LENGTH_SHORT).show()
 
         val home = findViewById<LinearLayout>(R.id.home)
@@ -116,11 +156,11 @@ class page6_Activity_search2 : AppCompatActivity() {
 
         val filter=findViewById<AutoCompleteTextView>(R.id.filter)
         filter.setOnClickListener{
-            topMentor(mntrlist)
+            topMentor(mntrlist,"")
         }
     }
 
-    private fun topMentor(mntrlist: MutableList<Mentors>){
+    private fun topMentor(mntrlist: MutableList<Mentors>, search:String){
 
         val container = findViewById<LinearLayout>(R.id.insertRecent2)
         Log.d("MyTag", "entered function")
@@ -129,114 +169,120 @@ class page6_Activity_search2 : AppCompatActivity() {
         for (mentor in mntrlist) {
             r="ok"
 
-            if (mentor.mail.toString()!=user.toString()) {
-                bool1=true
-                //Toast.makeText(this@page4_Activity_home,mntrlist[0].mail, Toast.LENGTH_SHORT).show()
-                val itemView = layoutInflater.inflate(R.layout.profile_view_in_search, null)
+            var namee:String=mentor.mail.toString()
+            val namebase2 = FirebaseDatabase.getInstance().getReference("user")
+            namebase2.child(mentor.mail.toString()).get().addOnSuccessListener { dataSnapshot ->
+                namee = dataSnapshot.child("namee").value.toString()}
+            Log.d("Search",namee)
 
-                // Retrieve img2 within the itemView
-                val img2 = itemView.findViewById<ImageView>(R.id.like)
-                val goto =itemView.findViewById<LinearLayout>(R.id.profileforsearch)
+            if(namee.contains(search)) {
+                if (mentor.mail.toString() != user.toString()) {
+                    bool1 = true
+                    //Toast.makeText(this@page4_Activity_home,mntrlist[0].mail, Toast.LENGTH_SHORT).show()
+                    val itemView = layoutInflater.inflate(R.layout.profile_view_in_search, null)
 
-                // Populate the item view with mentor data
+                    // Retrieve img2 within the itemView
+                    val img2 = itemView.findViewById<ImageView>(R.id.like)
 
-                //********** finding name *******
-                val namebase = FirebaseDatabase.getInstance().getReference("user")
-                val nameTextView = itemView.findViewById<TextView>(R.id.name)
-                namebase.child(mentor.mail.toString()).get().addOnSuccessListener { dataSnapshot ->
-                    nameTextView.text = dataSnapshot.child("namee").value.toString()
-                    if(nameTextView.text=="null")
-                        nameTextView.text=mentor.mail.toString()
 
-                    val pic=itemView.findViewById<ImageView>(R.id.profilepic)
-                    var uri=dataSnapshot.child("imguri").value.toString()
-                    if(uri.length>10)
-                        Glide.with(this)
-                            .load(uri)
-                            .into(pic)
-                    else
-                        Glide.with(this)
-                            .load(defulturi)
-                            .into(pic)
-                    Log.d("My tag", nameTextView.text.toString()+uri.toString())
-                }.addOnFailureListener { exception ->
-                    // Handle failure if needed
-                }
-                //****************************
+                    // Populate the item view with mentor data
 
-                val postTextView = itemView.findViewById<TextView>(R.id.post)
-                postTextView.text = mentor.disc
+                    //********** finding name *******
+                    val namebase = FirebaseDatabase.getInstance().getReference("user")
+                    val nameTextView = itemView.findViewById<TextView>(R.id.name)
+                    namebase.child(mentor.mail.toString()).get()
+                        .addOnSuccessListener { dataSnapshot ->
+                            nameTextView.text = dataSnapshot.child("namee").value.toString()
+                            if (nameTextView.text == "null")
+                                nameTextView.text = mentor.mail.toString()
 
-                val availTextView = itemView.findViewById<TextView>(R.id.avail)
-                availTextView.text = mentor.status
-
-                val priceTextView = itemView.findViewById<TextView>(R.id.price)
-                priceTextView.text = mentor.price
-
-                //****** Finding favourites *********
-                var bool=false
-                val likebase = FirebaseDatabase.getInstance().getReference("favourite")
-                likebase.child(user).get().addOnSuccessListener { dataSnapshot ->
-                    val namee = dataSnapshot.child("fmail").value.toString().replace("[", "")
-                        .replace("]", "")
-                    val fmail = namee.split(",") // Assuming your string is comma-separated
-
-                    val updatedList = fmail.toMutableList()
-                    val modifiedList = mutableListOf<String>()
-                    for(aa in updatedList)      //remove space from start of the word
-                    {
-                        if (aa[0]==' ') {
-                            modifiedList.add(aa.substring(1))
-                        }
-                        else
-                            modifiedList.add(aa)
+                            val pic = itemView.findViewById<ImageView>(R.id.profilepic)
+                            var uri = dataSnapshot.child("imguri").value.toString()
+                            if (uri.length > 10)
+                                Glide.with(this)
+                                    .load(uri)
+                                    .into(pic)
+                            else
+                                Glide.with(this)
+                                    .load(defulturi)
+                                    .into(pic)
+                            Log.d("My tag", nameTextView.text.toString() + uri.toString())
+                        }.addOnFailureListener { exception ->
+                        // Handle failure if needed
                     }
-                    var nam=true
+                    //****************************
+
+                    val postTextView = itemView.findViewById<TextView>(R.id.post)
+                    postTextView.text = mentor.disc
+
+                    val availTextView = itemView.findViewById<TextView>(R.id.avail)
+                    availTextView.text = mentor.status
+
+                    val priceTextView = itemView.findViewById<TextView>(R.id.price)
+                    priceTextView.text = mentor.price
+
+                    //****** Finding favourites *********
+                    var bool = false
+                    val likebase = FirebaseDatabase.getInstance().getReference("favourite")
+                    likebase.child(user).get().addOnSuccessListener { dataSnapshot ->
+                        val namee = dataSnapshot.child("fmail").value.toString().replace("[", "")
+                            .replace("]", "")
+                        val fmail = namee.split(",") // Assuming your string is comma-separated
+
+                        val updatedList = fmail.toMutableList()
+                        val modifiedList = mutableListOf<String>()
+                        for (aa in updatedList)      //remove space from start of the word
+                        {
+                            if (aa[0] == ' ') {
+                                modifiedList.add(aa.substring(1))
+                            } else
+                                modifiedList.add(aa)
+                        }
+                        var nam = true
 
 //                        val f = Favoutites(user, modifiedList)
 //                        likebase.child(user).setValue(f)
-                    nam=modifiedList.any{it==mentor.mail.toString()}
+                        nam = modifiedList.any { it == mentor.mail.toString() }
 
-                    if (nam == true) {
-                        img2.setImageResource(R.drawable.heart)
+                        if (nam == true) {
+                            img2.setImageResource(R.drawable.heart)
 
-                        nam = false
-                    } else {
-                        img2.setImageResource(R.drawable.heart_e)
-                        nam = true
+                            nam = false
+                        } else {
+                            img2.setImageResource(R.drawable.heart_e)
+                            nam = true
+                        }
+                        bool = nam
+
                     }
-                    bool=nam
-
-                }
-                img2.setOnClickListener {
-                    // Handle click for img2 within this item view
-                    if (bool == true) {
-                        favour(user.toString(),mentor.mail.toString())
-                        img2.setImageResource(R.drawable.heart)
-                        bool = false
-                    } else {
-                        rmfavour(user.toString(),mentor.mail.toString())
-                        img2.setImageResource(R.drawable.heart_e)
-                        bool = true
+                    img2.setOnClickListener {
+                        // Handle click for img2 within this item view
+                        if (bool == true) {
+                            favour(user.toString(), mentor.mail.toString())
+                            img2.setImageResource(R.drawable.heart)
+                            bool = false
+                        } else {
+                            rmfavour(user.toString(), mentor.mail.toString())
+                            img2.setImageResource(R.drawable.heart_e)
+                            bool = true
+                        }
+                        //eduMentor(mntrlist)
                     }
-                    //eduMentor(mntrlist)
+                    val goto = itemView.findViewById<LinearLayout>(R.id.profileforsearch)
+                    goto.setOnClickListener {
+                        val intent = Intent(this, page7_Activity_profile::class.java)
+                        intent.putExtra("USER_ID", user)
+                        intent.putExtra("PROFILE", mentor.mail.toString())
+                        startActivity(intent)
+                    }
+                    //**********************************
+
+
+                    // Add the inflated item view to the container
+
+                    container.addView(itemView)
+
                 }
-
-                goto.setOnClickListener {
-                    val intent = Intent(this, page7_Activity_profile::class.java)
-                    intent.putExtra("USER_ID", user)
-                    intent.putExtra("PROFILE", mentor.mail.toString())
-                    startActivity(intent)
-                }
-                //**********************************
-
-
-
-
-                // Add the inflated item view to the container
-
-                container.addView(itemView)
-
             }
         }
 

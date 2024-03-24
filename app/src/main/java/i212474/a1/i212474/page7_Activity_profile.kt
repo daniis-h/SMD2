@@ -27,6 +27,7 @@ class page7_Activity_profile : AppCompatActivity() {
             fetchUser(mentorID)
         }
 
+
         // Initialize the TextView
         val gabout: TextView = findViewById(R.id.about)
 

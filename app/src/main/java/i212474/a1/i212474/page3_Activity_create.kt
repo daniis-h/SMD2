@@ -130,7 +130,7 @@ class page3_Activity_create : AppCompatActivity() {
 
         if (check == true) {
             val userID = mail.substringBefore('@').replace('.', ' ').replace('_', '2')
-            val user = UserModel(userID, name,mail, num, pass, city,"1", countr, "","","")
+            val user = UserModel(userID, name,mail, num, pass, city,"1", countr, "","","","")
 
             dbRef.child(userID).setValue(user)
                 .addOnCompleteListener {

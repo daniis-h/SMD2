@@ -3,8 +3,24 @@ package i212474.a1.i212474
 data class chatMessageModel(
     var msgID:String,
     var recId:String,
-    var ID:String,
+    var id:String,
     var time:String,
     var uri:String,
-    var message: String?
+    var message: String,
+    var audio: String,
+    var picture: String,
+    var file: String,
+    var type: String?
+)
+
+data class CommchatMessageModel(
+    var msgID:String,
+    var id:String,
+    var time:String,
+    var uri:String,
+    var message: String,
+    var audio: String,
+    var picture: String,
+    var file: String,
+    var type: String?
 )

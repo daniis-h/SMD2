@@ -66,7 +66,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="#06514A"
-
+                    android:id="@+id/noti"
                     android:layout_margin="1dp"
                     android:padding="2dp"
                     android:src="@drawable/bell"
@@ -296,249 +296,18 @@
                 android:layout_height="wrap_content"
                 tools:ignore="ExtraText">
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal"
                     android:paddingLeft="7dp"
                     android:paddingRight="7dp"
-
+                    android:id="@+id/layer3"
                     >
 
-                    <LinearLayout
-                        android:layout_width="180dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/imagebox"
-                        android:orientation="vertical"
-                        android:paddingLeft="7dp"
-                        android:paddingRight="7dp"
-                        android:gravity="bottom"
-                        >
-
-                        <LinearLayout
-                            android:layout_width="175dp"
-                            android:layout_height="70dp"
-                            android:background="@drawable/text_boarder"
-
-                            android:weightSum="2"
-                            android:orientation="horizontal"
-                            android:padding="10dp"
-
-                            >
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="60dp"
-                                android:background="@drawable/text_boarder"
-
-                                android:gravity="top"
-                                android:orientation="vertical"
-
-                                >
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Micheal Drake"
-                                    android:textSize="12dp"/>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="NJP Expert"
-                                    android:textSize="11dp"/>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Available"
-                                    android:textSize="10dp"
-                                    android:textColor="#4EDF54"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="114dp"
-                                android:layout_height="50dp"
-                                android:background="@drawable/text_boarder"
-                                android:layout_weight="1.5"
-                                android:gravity="top"
-                                android:orientation="vertical"
-
-
-                                >
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="$1500/session"
-                                    android:textSize="10dp"
-                                    android:textColor="#EAD736"/>
-                                <ImageView  android:id="@+id/micheal1_h"
-                                    android:padding="3dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/heart_e"/>
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="180dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/imagebox"
-                        android:orientation="vertical"
-                        android:paddingLeft="7dp"
-                        android:paddingRight="7dp"
-                        android:gravity="bottom"
-                        >
-
-                        <LinearLayout
-                            android:layout_width="175dp"
-                            android:layout_height="70dp"
-                            android:background="@drawable/text_boarder"
-
-                            android:weightSum="2"
-                            android:orientation="horizontal"
-                            android:padding="10dp"
-
-                            >
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="60dp"
-                                android:background="@drawable/text_boarder"
-
-                                android:gravity="top"
-                                android:orientation="vertical"
-
-                                >
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Alex"
-                                    android:textSize="12dp"/>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Android Devloper"
-                                    android:textSize="11dp"/>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Not Available"
-                                    android:textSize="10dp"
-                                    android:textColor="#A8AEA9"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="114dp"
-                                android:layout_height="50dp"
-                                android:background="@drawable/text_boarder"
-                                android:layout_weight="1.6"
-                                android:gravity="top"
-                                android:orientation="vertical"
-
-
-                                >
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="$1500/session"
-                                    android:textSize="10dp"
-                                    android:textColor="#EAD736"/>
-                                <ImageView  android:id="@+id/alex1_h"
-                                    android:padding="3dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/heart_e"/>
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="180dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/imagebox"
-                        android:orientation="vertical"
-                        android:paddingLeft="7dp"
-                        android:paddingRight="7dp"
-                        android:gravity="bottom"
-                        >
-
-                        <LinearLayout
-                            android:layout_width="175dp"
-                            android:layout_height="70dp"
-                            android:background="@drawable/text_boarder"
-
-                            android:weightSum="2"
-                            android:orientation="horizontal"
-                            android:padding="10dp"
-
-                            >
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="60dp"
-                                android:background="@drawable/text_boarder"
-
-                                android:gravity="top"
-                                android:orientation="vertical"
-
-                                >
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Jane"
-                                    android:textSize="12dp"/>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Software Engineer"
-                                    android:textSize="11dp"/>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Not Available"
-                                    android:textSize="10dp"
-                                    android:textColor="#A8AEA9"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="114dp"
-                                android:layout_height="50dp"
-                                android:background="@drawable/text_boarder"
-                                android:layout_weight="1.6"
-                                android:gravity="top"
-                                android:orientation="vertical"
-
-
-                                >
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="$1500/session"
-                                    android:textSize="10dp"
-                                    android:textColor="#EAD736"/>
-                                <ImageView  android:id="@+id/jane1_h"
-                                    android:padding="3dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/heart_e"/>
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
                 </LinearLayout>
-
             </HorizontalScrollView>
 
         </LinearLayout>

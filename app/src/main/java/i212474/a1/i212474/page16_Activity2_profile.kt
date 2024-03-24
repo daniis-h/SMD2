@@ -69,12 +69,14 @@ class page16_Activity2_profile : AppCompatActivity() {
         var mail:String=""
         var pass:String=""
         var img:String=""
+        var cover:String=""
         if (userID != null) {
 
             database.child(userID).get().addOnSuccessListener {
                 mail= it.child("mail").value.toString()
                 pass =it.child("pass").value.toString()
                 img =it.child("imguri").value.toString()
+                cover=it.child("coveruri").value.toString()
             }
         }
         val back1 = findViewById<ImageView>(R.id.back)
@@ -86,12 +88,12 @@ class page16_Activity2_profile : AppCompatActivity() {
         }
         val book =findViewById<Button>(R.id.create)
         book.setOnClickListener {
-            userID=updateProfile(mail, pass,img)
+            userID=updateProfile(mail, pass,img,cover)
             Toast.makeText(applicationContext, "Profile is updated", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun updateProfile(mail:String, pass:String, img:String):String {
+    private fun updateProfile(mail:String, pass:String, img:String,cover:String):String {
         Log.d("MyTag", "entered function")
         database=FirebaseDatabase.getInstance().getReference("user")
         val name=findViewById<EditText>(R.id.name)
@@ -121,7 +123,7 @@ class page16_Activity2_profile : AppCompatActivity() {
 
         val newuser = UserModel(userID, name.text.toString(),email.text.toString(), number.text.toString(),
             pass, autoCompletecity?.text.toString(),"2", autoCompletecoutry?.text.toString(),
-            img,"","")
+            img,cover,"","")
 
 
         database.child(userID).setValue(newuser)

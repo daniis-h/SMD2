@@ -124,6 +124,10 @@ class page9_Activity_add : AppCompatActivity() {
                         ename.text.clear()
                         edisc.text.clear()
                         autoComplete?.text?.clear()
+                        val str="Thanks for adding mentor"
+                        val database = FirebaseDatabase.getInstance().getReference("notifics").child(user)
+                        val newMessageRef = database.push()
+                        newMessageRef.setValue(str)
                     }
                     .addOnFailureListener { err ->
                         Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
@@ -138,6 +142,10 @@ class page9_Activity_add : AppCompatActivity() {
                         ename.text.clear()
                         edisc.text.clear()
                         autoComplete?.text?.clear()
+                        val str="Thanks for adding mentor"
+                        val database = FirebaseDatabase.getInstance().getReference("notifics").child(user)
+                        val newMessageRef = database.push()
+                        newMessageRef.setValue(str)
                     }
                     .addOnFailureListener { err ->
                         Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()

@@ -26,6 +26,7 @@ class page17_Activity_profileView : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var storageReff: StorageReference
     private lateinit var imageuri: Uri
+    private lateinit var coveruri: Uri
     private lateinit var user: String
     private var defulturi:String="https://firebasestorage.googleapis.com/v0/b/mentor-me-6558f.appspot.com/o/Pictures%2Fextra?alt=media&token=bf8bc9bc-f2c8-4faf-bd35-46b5054fd72e"
 
@@ -36,6 +37,15 @@ class page17_Activity_profileView : AppCompatActivity() {
                 findViewById<com.google.android.material.imageview.ShapeableImageView>(R.id.profilepic)
             img.setImageURI(imageuri)
             saveimage()
+        }
+    }
+
+    private val selectcover = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        if (it != null) {
+            coveruri = it
+            val img = findViewById<ImageView>(R.id.cover)
+            img.setImageURI(coveruri)
+            savecover()
         }
     }
 
@@ -89,12 +99,75 @@ class page17_Activity_profileView : AppCompatActivity() {
                 Log.e("FirebaseError", "Error reading bookings: ${error.message}")
             }
         })
+
+//----------------------------Favourit
+
+        val database = FirebaseDatabase.getInstance().getReference("favourite")
+
+        database.child(user).get().addOnSuccessListener { dataSnapshot ->
+            val namee = dataSnapshot.child("fmail").value.toString().replace("[", "")
+                .replace("]", "")
+
+            val fmail = namee.split(",") // Assuming your string is comma-separated
+
+            val updatedList = fmail.toMutableList()
+            val modifiedList = mutableListOf<String>()
+            for (aa in updatedList)      //remove space from start of the word
+            {
+                Log.d("MyTag:-", aa.toString())
+                if (aa[0] == ' ') {
+                    modifiedList.add(aa.substring(1))
+                } else
+                    modifiedList.add(aa)
+            }
+
+            var mntrlist = mutableListOf<Mentors>()
+            //mntrlist.clear()
+
+
+            val dbMentor = FirebaseDatabase.getInstance().getReference("mentor")
+
+            dbMentor.addValueEventListener(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    for (mntosnap in snapshot.children) {
+
+
+                        // Retrieve data from the database
+                        val name = mntosnap.child("mail").getValue(String::class.java)
+                        val price = mntosnap.child("price").getValue(String::class.java)
+                        val disc = mntosnap.child("disc").getValue(String::class.java)
+                        val status = mntosnap.child("status").getValue(String::class.java)
+
+                        val mdata = Mentors(name, status, price, disc)
+                        mntrlist.add(mdata)
+                        //Toast.makeText(this@page4_Activity_home,mntrlist.size.toString(), Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    //Toast.makeText(this@page4_Activity_home,"error", Toast.LENGTH_SHORT).show()
+                    // Handle onCancelled event (optional)
+                }
+            })
+
+            val handler = Handler(Looper.getMainLooper())
+            super.onResume()
+            handler.postDelayed({
+                if(reviewlist.isNotEmpty())
+                    favMentor(mntrlist,modifiedList)
+            }, 2000)
+        }
+
+//---------------------------------------------
         val handler = Handler(Looper.getMainLooper())
         super.onResume()
         handler.postDelayed({
             if(reviewlist.isNotEmpty())
                 topReview(reviewlist)
-        }, 4000)
+        }, 2000)
 
 
         val search = findViewById<LinearLayout>(R.id.search)
@@ -145,6 +218,12 @@ class page17_Activity_profileView : AppCompatActivity() {
             selectimg.launch("image/*")
 
         }
+        val edit2 = findViewById<LinearLayout>(R.id.edit1)
+
+        edit2.setOnClickListener {
+            selectcover.launch("image/*")
+
+        }
 
         val book = findViewById<Button>(R.id.book)
 
@@ -164,7 +243,69 @@ class page17_Activity_profileView : AppCompatActivity() {
 //            startActivity(intent)
         }
     }
+    private fun favMentor(mntrlist:MutableList<Mentors>,favs: MutableList<String>) {
+        Log.d("MyTag==", "Enter favs")
 
+        val container2 = findViewById<LinearLayout>(R.id.fav)
+        container2.removeAllViews()
+        for (mentor in mntrlist) {
+            Log.d("MyTag==", mentor.mail.toString())
+            if (favs.contains(mentor.mail.toString())) {
+                val itemView = layoutInflater.inflate(R.layout.profiles_home, null)
+
+                // Retrieve img2 within the itemView
+                val img2 = itemView.findViewById<ImageView>(R.id.like)
+
+                // Populate the item view with mentor data
+
+
+                //********** finding name *******
+                val namebase = FirebaseDatabase.getInstance().getReference("user")
+                val nameTextView = itemView.findViewById<TextView>(R.id.name)
+                namebase.child(mentor.mail.toString()).get().addOnSuccessListener { dataSnapshot ->
+                    nameTextView.text = dataSnapshot.child("namee").value.toString()
+                    if (nameTextView.text == "null")
+                        nameTextView.text = mentor.mail.toString()
+
+                }.addOnFailureListener { exception ->
+                    // Handle failure if needed
+                }
+                //****************************
+
+                val postTextView = itemView.findViewById<TextView>(R.id.disc)
+                postTextView.text = mentor.disc
+
+                val availTextView = itemView.findViewById<TextView>(R.id.avail)
+                availTextView.text = mentor.status
+
+                val priceTextView = itemView.findViewById<TextView>(R.id.price)
+                priceTextView.text = mentor.price
+
+
+                img2.setImageResource(R.drawable.heart)
+
+
+                //topMentor(mntrlist)
+
+                //**********************************
+                val goto = itemView.findViewById<LinearLayout>(R.id.profileforsearch)
+                goto.setOnClickListener {
+                    val intent = Intent(this, page7_Activity_profile::class.java)
+                    intent.putExtra("USER_ID", user)
+                    intent.putExtra("PROFILE", mentor.mail.toString())
+                    startActivity(intent)
+                }
+
+                // Add the inflated item view to the container
+
+                container2.addView(itemView)
+
+
+            }
+        }
+
+
+    }
 
 
 
@@ -176,6 +317,7 @@ class page17_Activity_profileView : AppCompatActivity() {
             val nam = it.child("namee").value.toString()
             val cit = it.child("city").value.toString()
             val image = it.child("imguri").value.toString()
+            val cov = it.child("coveruri").value.toString()
 
 
             val name = findViewById<TextView>(R.id.name17)
@@ -191,6 +333,13 @@ class page17_Activity_profileView : AppCompatActivity() {
                 Glide.with(this)
                     .load(defulturi)
                     .into(img)
+
+
+            val cover = findViewById<ImageView>(R.id.cover)
+            if (cov.length > 10)
+                Glide.with(this)
+                    .load(cov)
+                    .into(cover)
             name.text = nam
             city.text = cit
             Log.d("MyTag", "out of fetctuser function")
@@ -211,7 +360,42 @@ class page17_Activity_profileView : AppCompatActivity() {
                             .addOnSuccessListener {
                                 Toast.makeText(
                                     this,
-                                    "Name updated successfully",
+                                    "profile picture updated successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(
+                                    this,
+                                    "Failed to update name: ${e.message}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
+                    }
+                }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show()
+                    }
+            }
+        Log.d("MyTag", "out of function")
+    }
+
+    private fun savecover() {
+        val storeref = FirebaseStorage.getInstance().getReference("Pictures")
+            .child(user)
+        Log.d("MyTag", "entered save cover function")
+
+        storeref.putFile(coveruri!!)
+            .addOnSuccessListener {
+                storeref.downloadUrl.addOnSuccessListener {
+                    //save Path
+                    if (user != null) {
+                        database.child(user).child("coveruri").setValue(it.toString())
+                            .addOnSuccessListener {
+                                Toast.makeText(
+                                    this,
+                                    "cover updated successfully",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }

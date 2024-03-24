@@ -10,6 +10,14 @@ class UserModel(
     val count:String,
     val countr: String,
     val imguri: String,
+    val coveruri: String,
     val status: String,
     val usertype: String?
+)
+
+class OtherUserModel(
+    val userID: String?,
+    val namee: String?,
+    val mail: String?,
+    val token: String?
 )

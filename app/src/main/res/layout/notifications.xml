@@ -21,12 +21,12 @@
 
         android:layout_marginTop="10dp"/>
 
-    <ImageButton
-        android:id="@+id/clearSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_clear_24"
-        android:background="@android:color/transparent" />
+        <ImageButton
+            android:id="@+id/clearSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_clear_24" />
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
