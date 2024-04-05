@@ -21,11 +21,7 @@ class RecyclerDataAdapter(private val items:MutableList<chatMessageModel>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text= items[position].message
         holder.value.text=items[position].time.toString()
-
-
     }
-
-
     class ViewHolder (itemView: View):RecyclerView.ViewHolder(itemView){
         val name:TextView=itemView.findViewById(R.id.msg)
         val value:TextView=itemView.findViewById(R.id.time)

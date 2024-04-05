@@ -156,7 +156,6 @@ class page23_Activity_audioCall : AppCompatActivity() {
         // Create a Runnable to update the timer every second
         val runnable = object : Runnable {
             override fun run() {
-                if(isJoined) {
                     // Increment seconds elapsed
                     secondsElapsed++
 
@@ -170,7 +169,7 @@ class page23_Activity_audioCall : AppCompatActivity() {
                     // Schedule the handler to run again after 1 second (1000 milliseconds)
                     handler.postDelayed(this, 1000)
                 }
-            }
+
         }
 
         // Start the handler to run the Runnable
@@ -213,10 +212,14 @@ class page23_Activity_audioCall : AppCompatActivity() {
                 runOnUiThread { setupRemoteVideo(uid) }
             }
 
-            override fun onJoinChannelSuccess(channel: String?, uid: Int, elapsed: Int) {
-                isJoined=true
-                showMessage("Joined Channel $channel")
-            }
+                override fun onJoinChannelSuccess(channel: String?, uid: Int, elapsed: Int) {
+                    isJoined = true
+                    showMessage("Joined Channel $channel")
+
+                    // Start the timer when the user successfully joins the channel
+                    startTimer()
+                }
+
 
             override fun onUserOffline(uid: Int, reason: Int) {
                 showMessage("User Offline")

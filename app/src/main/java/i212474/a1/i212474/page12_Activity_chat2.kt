@@ -439,6 +439,24 @@ class page12_Activity_chat2 : AppCompatActivity(), ScreenshotDetectionDelegate.S
                     ).show()
                 }
         }
+        else
+        {
+
+            val database = FirebaseDatabase.getInstance().getReference("chat").child(assignAnID)
+            database.child(msgid!!).child("message").setValue(msg.text.toString())
+                .addOnSuccessListener {
+                    //Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show()
+                    msg.setText("")
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(
+                        this,
+                        "Failed to send message: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            msgid=""
+        }
 
 
         LoadMsg(assignAnID.toString())

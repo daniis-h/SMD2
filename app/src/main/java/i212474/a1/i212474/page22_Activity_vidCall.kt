@@ -55,6 +55,7 @@ class page22_Activity_vidCall : AppCompatActivity() {
         {
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_page22_vid_call)
